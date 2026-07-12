@@ -1,0 +1,335 @@
+LiquidEther.tsx:115 THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+warn @ three.js?v=cb0b28ea:1728
+Clock @ three.js?v=cb0b28ea:38678
+(anonymous) @ LiquidEther.tsx:115
+(anonymous) @ LiquidEther.tsx:1119
+(anonymous) @ LiquidEther.tsx:1208
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12902
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+commitHookEffectListMount @ react-dom_client.js?v=cb0b28ea:6617
+commitHookPassiveMountEffects @ react-dom_client.js?v=cb0b28ea:6652
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7618
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7672
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7672
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7672
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7617
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7617
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7672
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7627
+flushPassiveEffects @ react-dom_client.js?v=cb0b28ea:8808
+(anonymous) @ react-dom_client.js?v=cb0b28ea:8562
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LiquidEther>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ LandingSection.tsx:25
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LandingSection>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+App @ App.tsx:28
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ main.tsx:8
+LiquidEther.tsx:115 THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+warn @ three.js?v=cb0b28ea:1728
+Clock @ three.js?v=cb0b28ea:38678
+(anonymous) @ LiquidEther.tsx:115
+(anonymous) @ LiquidEther.tsx:1119
+(anonymous) @ LiquidEther.tsx:1208
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12902
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+commitHookEffectListMount @ react-dom_client.js?v=cb0b28ea:6617
+commitHookPassiveMountEffects @ react-dom_client.js?v=cb0b28ea:6652
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7701
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7713
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7713
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7713
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7700
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7700
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7713
+doubleInvokeEffectsOnFiber @ react-dom_client.js?v=cb0b28ea:8924
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+recursivelyTraverseAndDoubleInvokeEffectsInDEV @ react-dom_client.js?v=cb0b28ea:8917
+commitDoubleInvokeEffectsInDEV @ react-dom_client.js?v=cb0b28ea:8932
+flushPassiveEffects @ react-dom_client.js?v=cb0b28ea:8809
+(anonymous) @ react-dom_client.js?v=cb0b28ea:8562
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LiquidEther>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ LandingSection.tsx:25
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LandingSection>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+App @ App.tsx:28
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ main.tsx:8
+LiquidEther.tsx:607 Uncaught TypeError: Cannot read properties of undefined (reading 'material')
+    at Poisson.init (LiquidEther.tsx:607:66)
+    at new Poisson (LiquidEther.tsx:836:14)
+    at Simulation.createShaderPass (LiquidEther.tsx:989:24)
+    at Simulation.init (LiquidEther.tsx:932:14)
+    at new Simulation (LiquidEther.tsx:926:14)
+    at new Output (LiquidEther.tsx:1067:27)
+    at WebGLManager.init (LiquidEther.tsx:1151:23)
+    at new WebGLManager (LiquidEther.tsx:1133:14)
+    at LiquidEther.tsx:1208:19
+    at Object.react_stack_bottom_frame (react-dom_client.js?v=cb0b28ea:12902:13)
+(anonymous) @ LiquidEther.tsx:607
+(anonymous) @ LiquidEther.tsx:836
+(anonymous) @ LiquidEther.tsx:989
+(anonymous) @ LiquidEther.tsx:932
+(anonymous) @ LiquidEther.tsx:926
+(anonymous) @ LiquidEther.tsx:1067
+(anonymous) @ LiquidEther.tsx:1151
+(anonymous) @ LiquidEther.tsx:1133
+(anonymous) @ LiquidEther.tsx:1208
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12902
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+commitHookEffectListMount @ react-dom_client.js?v=cb0b28ea:6617
+commitHookPassiveMountEffects @ react-dom_client.js?v=cb0b28ea:6652
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7618
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7672
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7672
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7672
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7617
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7617
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7672
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=cb0b28ea:7606
+commitPassiveMountOnFiber @ react-dom_client.js?v=cb0b28ea:7627
+flushPassiveEffects @ react-dom_client.js?v=cb0b28ea:8808
+(anonymous) @ react-dom_client.js?v=cb0b28ea:8562
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LiquidEther>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ LandingSection.tsx:25
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LandingSection>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+App @ App.tsx:28
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ main.tsx:8
+LandingSection.tsx:25 An error occurred in the <LiquidEther> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+defaultOnUncaughtError @ react-dom_client.js?v=cb0b28ea:5258
+logUncaughtError @ react-dom_client.js?v=cb0b28ea:5287
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+lane.callback @ react-dom_client.js?v=cb0b28ea:5315
+callCallback @ react-dom_client.js?v=cb0b28ea:4095
+commitCallbacks @ react-dom_client.js?v=cb0b28ea:4103
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+commitLayoutEffectOnFiber @ react-dom_client.js?v=cb0b28ea:6986
+flushLayoutEffects @ react-dom_client.js?v=cb0b28ea:8671
+commitRoot @ react-dom_client.js?v=cb0b28ea:8584
+commitRootWhenReady @ react-dom_client.js?v=cb0b28ea:8079
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:8051
+performSyncWorkOnRoot @ react-dom_client.js?v=cb0b28ea:9067
+flushSyncWorkAcrossRoots_impl @ react-dom_client.js?v=cb0b28ea:8984
+flushPassiveEffects @ react-dom_client.js?v=cb0b28ea:8816
+(anonymous) @ react-dom_client.js?v=cb0b28ea:8562
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LiquidEther>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ LandingSection.tsx:25
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LandingSection>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+App @ App.tsx:28
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ main.tsx:8
+LiquidEther.tsx:607 Uncaught TypeError: Cannot read properties of undefined (reading 'material')
+    at Poisson.init (LiquidEther.tsx:607:66)
+    at new Poisson (LiquidEther.tsx:836:14)
+    at Simulation.createShaderPass (LiquidEther.tsx:989:24)
+    at Simulation.init (LiquidEther.tsx:932:14)
+    at new Simulation (LiquidEther.tsx:926:14)
+    at new Output (LiquidEther.tsx:1067:27)
+    at WebGLManager.init (LiquidEther.tsx:1151:23)
+    at new WebGLManager (LiquidEther.tsx:1133:14)
+    at LiquidEther.tsx:1208:19
+    at Object.react_stack_bottom_frame (react-dom_client.js?v=cb0b28ea:12902:13)
+(anonymous) @ LiquidEther.tsx:607
+(anonymous) @ LiquidEther.tsx:836
+(anonymous) @ LiquidEther.tsx:989
+(anonymous) @ LiquidEther.tsx:932
+(anonymous) @ LiquidEther.tsx:926
+(anonymous) @ LiquidEther.tsx:1067
+(anonymous) @ LiquidEther.tsx:1151
+(anonymous) @ LiquidEther.tsx:1133
+(anonymous) @ LiquidEther.tsx:1208
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12902
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+commitHookEffectListMount @ react-dom_client.js?v=cb0b28ea:6617
+commitHookPassiveMountEffects @ react-dom_client.js?v=cb0b28ea:6652
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7701
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7713
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7713
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7713
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7700
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7700
+recursivelyTraverseReconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7688
+reconnectPassiveEffects @ react-dom_client.js?v=cb0b28ea:7713
+doubleInvokeEffectsOnFiber @ react-dom_client.js?v=cb0b28ea:8924
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+recursivelyTraverseAndDoubleInvokeEffectsInDEV @ react-dom_client.js?v=cb0b28ea:8917
+commitDoubleInvokeEffectsInDEV @ react-dom_client.js?v=cb0b28ea:8932
+flushPassiveEffects @ react-dom_client.js?v=cb0b28ea:8809
+(anonymous) @ react-dom_client.js?v=cb0b28ea:8562
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LiquidEther>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ LandingSection.tsx:25
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<LandingSection>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+App @ App.tsx:28
+react_stack_bottom_frame @ react-dom_client.js?v=cb0b28ea:12866
+renderWithHooksAgain @ react-dom_client.js?v=cb0b28ea:4268
+renderWithHooks @ react-dom_client.js?v=cb0b28ea:4219
+updateFunctionComponent @ react-dom_client.js?v=cb0b28ea:5569
+beginWork @ react-dom_client.js?v=cb0b28ea:6140
+runWithFiberInDEV @ react-dom_client.js?v=cb0b28ea:851
+performUnitOfWork @ react-dom_client.js?v=cb0b28ea:8429
+workLoopSync @ react-dom_client.js?v=cb0b28ea:8325
+renderRootSync @ react-dom_client.js?v=cb0b28ea:8309
+performWorkOnRoot @ react-dom_client.js?v=cb0b28ea:7957
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=cb0b28ea:9059
+performWorkUntilDeadline @ react-dom_client.js?v=cb0b28ea:36
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=cb0b28ea:193
+(anonymous) @ main.tsx:8
+LandingSection.tsx:25 An error occurred in the <LiquidEther> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
