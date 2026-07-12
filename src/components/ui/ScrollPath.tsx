@@ -16,7 +16,7 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
   const progressVal = useMotionValue(progress)
   useEffect(() => { progressVal.set(progress) }, [progress, progressVal])
   const smoothProgress = useSpring(progressVal, { stiffness: 100, damping: 24 })
-  const [dotPos, setDotPos] = useState({ x: 12, y: 0 })
+  const [dotPos, setDotPos] = useState({ x: 64, y: 0 })
   const [waypoints, setWaypoints] = useState<{ x: number; y: number }[]>([])
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
@@ -72,7 +72,7 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
         const el = document.getElementById(id)
         const raw = el ? el.offsetTop : 0
         const y = margin + ((raw / scrollHeight) * (svgSize.height - margin * 2))
-        const pad = svgSize.width * 0.1
+        const pad = svgSize.width * 0.18
         const x = i % 2 === 0 ? pad : svgSize.width - pad
         return { x, y }
       })
@@ -134,7 +134,7 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed left-3 top-0 z-50 h-screen w-5 overflow-visible pointer-events-none"
+      className="fixed left-3 top-0 z-50 h-screen w-32 overflow-visible pointer-events-none"
       aria-hidden="true"
     >
       <svg
@@ -144,7 +144,7 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
       >
         <defs>
           <filter id="pathGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feGaussianBlur stdDeviation="18" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="blur" />
@@ -160,12 +160,12 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
           </linearGradient>
         </defs>
 
-        <path d={pathD} fill="none" stroke="var(--border)" strokeWidth="1.5" strokeOpacity={0.35 * o} />
-        <path ref={pathRef} d={pathD} fill="none" stroke="url(#pathGrad)" strokeWidth="2.5" />
+        <path d={pathD} fill="none" stroke="var(--border)" strokeWidth="12" strokeOpacity={0.35 * o} />
+        <path ref={pathRef} d={pathD} fill="none" stroke="url(#pathGrad)" strokeWidth="14" />
 
-        <circle cx={dotPos.x} cy={dotPos.y} r="6" fill="var(--accent)" opacity={0.15 * Math.min(1, o * 2)} filter="url(#pathGlow)" />
-        <circle cx={dotPos.x} cy={dotPos.y} r="3" fill="var(--accent)" opacity={0.6 * o} />
-        <circle cx={dotPos.x} cy={dotPos.y} r="1.5" fill="#fff" opacity={0.8 * o} />
+        <circle cx={dotPos.x} cy={dotPos.y} r="36" fill="var(--accent)" opacity={0.1 * Math.min(1, o * 2)} filter="url(#pathGlow)" />
+        <circle cx={dotPos.x} cy={dotPos.y} r="14" fill="var(--accent)" opacity={0.6 * o} />
+        <circle cx={dotPos.x} cy={dotPos.y} r="7" fill="#fff" opacity={0.8 * o} />
       </svg>
     </div>
   )
