@@ -1,4 +1,5 @@
 import { ScrollPath } from './components/ui/ScrollPath'
+import { Navbar } from './components/ui/Navbar'
 import { LandingSection } from './components/sections/LandingSection'
 import { AboutSection } from './components/sections/AboutSection'
 import { WorkflowSection } from './components/sections/WorkflowSection'
@@ -24,6 +25,7 @@ const SECTION_IDS = [
 function App() {
   return (
     <>
+      <Navbar sectionIds={SECTION_IDS} />
       <ScrollPath sectionIds={SECTION_IDS} />
       <LandingSection />
       <AboutSection />

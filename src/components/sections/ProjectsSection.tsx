@@ -6,15 +6,24 @@ import { staggerContainer, springTransition } from '../../lib/animations'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 const featuredProject = {
-  title: 'Fleur de Luxe',
+  title: 'Gym Management System',
   description:
-    'A luxury flower e-commerce platform with a premium shopping experience. Built with Next.js, TypeScript, and TailwindCSS, featuring a product catalog, cart, checkout flow, and Supabase backend.',
-  technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Supabase'],
-  github: 'https://github.com/mouataz-bk/fleur-de-luxe',
-  demo: 'https://fleur-de-luxe.vercel.app',
+    'Full-stack management platform with member management, admin dashboard, authentication, and REST API built with Laravel and React.',
+  technologies: ['Laravel', 'React', 'REST API', 'Auth'],
+  github: 'https://github.com/mouataz-bk/gym-management',
+  demo: 'https://alien-gym-management.vercel.app/',
+  image: '/gympic.png',
 }
 
 const projects = [
+  {
+    title: 'Fleur de Luxe',
+    description:
+      'A luxury flower e-commerce platform with a premium shopping experience. Built with Next.js, TypeScript, and TailwindCSS, featuring a product catalog, cart, checkout flow, and Supabase backend.',
+    technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Supabase'],
+    github: 'https://github.com/mouataz-bk/fleur-de-luxe',
+    demo: 'https://fleur-de-luxe.vercel.app',
+  },
   {
     title: 'AHAYZONE',
     description:
@@ -22,13 +31,6 @@ const projects = [
     technologies: ['React', 'TailwindCSS', 'Framer Motion'],
     github: 'https://github.com/mouataz-bk/ahayzone',
     demo: 'https://ahayzone.vercel.app',
-  },
-  {
-    title: 'Gym Management System',
-    description:
-      'Full-stack management platform with member management, admin dashboard, authentication, and REST API built with Laravel and React.',
-    technologies: ['Laravel', 'React', 'REST API', 'Auth'],
-    github: 'https://github.com/mouataz-bk/gym-management',
   },
   {
     title: 'Pharmacy Platform',

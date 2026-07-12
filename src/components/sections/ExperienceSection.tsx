@@ -11,28 +11,28 @@ import {
 
 const experiences = [
   {
-    period: '2024 — Present',
+    period: 'Nov 2025 — Present',
     title: 'Full Stack Development Student',
     description:
       'Studying Software Development Full Stack at OFPPT ISMONTIC. Building complete real-world applications with React, Next.js, Laravel, and modern tools.',
     tags: ['React', 'Next.js', 'Laravel', 'TypeScript'],
   },
   {
-    period: '2024',
+    period: '2025',
     title: 'Project — Fleur de Luxe',
     description:
       'Built a luxury flower e-commerce platform from scratch using Next.js, TypeScript, TailwindCSS, and Supabase. Focused on premium UX and performance.',
     tags: ['Next.js', 'Supabase', 'E-commerce'],
   },
   {
-    period: '2024',
+    period: '2025',
     title: 'Project — AHAYZONE',
     description:
       'Developed a multilingual art gallery and tourism platform with React, TailwindCSS, and Framer Motion animations. Showcasing Asilah\'s artistic culture.',
     tags: ['React', 'Multilingual', 'Animations'],
   },
   {
-    period: '2024',
+    period: '2025',
     title: 'Freelance-Ready Developer',
     description:
       'Available for freelance opportunities and junior developer positions. Experienced in building full-stack applications with modern architectures.',

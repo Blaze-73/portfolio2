@@ -84,21 +84,10 @@ export function WorkflowSection() {
                 <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
               </motion.div>
 
-              <motion.div
-                className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-sm transition-all duration-500 hover:border-[var(--accent-border)] hover:shadow-lg hover:shadow-[var(--accent)]/5 md:p-8"
-                initial={reducedMotion ? {} : { borderColor: 'var(--border)' }}
-                whileInView={reducedMotion ? {} : { borderColor: 'var(--border)' }}
-                viewport={{ once: true }}
-              >
-                <motion.div
-                  className="pointer-events-none absolute inset-0"
-                  initial={reducedMotion ? {} : { x: '-100%', opacity: 0.3 }}
-                  whileInView={reducedMotion ? {} : { x: '200%', opacity: 0 }}
-                  viewport={{ once: true }}
-                  transition={reducedMotion ? { duration: 0 } : { duration: 0.8, delay: i * 0.05 + 0.25, ease: 'easeInOut' }}
-                  style={{
-                    background: 'linear-gradient(90deg, transparent 0%, var(--accent-border) 40%, rgba(170, 59, 255, 0.15) 60%, transparent 100%)',
-                  }}
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-sm transition-all duration-500 hover:scale-[1.02] hover:border-[var(--accent-border)] hover:shadow-xl hover:shadow-[var(--accent)]/10 md:p-8">
+                <div
+                  className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-[var(--accent-border)]/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                  aria-hidden="true"
                 />
 
                 <span className="relative z-10 mb-2 block text-xs font-medium uppercase tracking-[0.15em] text-[var(--accent)]">
@@ -110,7 +99,7 @@ export function WorkflowSection() {
                 <p className="relative z-10 max-w-2xl leading-relaxed text-[var(--text)]">
                   {step.description}
                 </p>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </motion.div>

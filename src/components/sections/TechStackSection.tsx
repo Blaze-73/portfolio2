@@ -37,6 +37,10 @@ const categories = [
     title: 'Tools',
     technologies: ['Git', 'GitHub', 'Docker', 'Redis', 'Figma', 'Postman', 'VS Code'],
   },
+  {
+    title: 'Cloud & DevOps',
+    technologies: ['Vercel', 'Netlify', 'Supabase', 'Cloudflare', 'Linux', 'Nginx'],
+  },
 ]
 
 export function TechStackSection() {
@@ -62,12 +66,17 @@ export function TechStackSection() {
             key={category.title}
             variants={fadeUp}
             transition={reducedMotion ? { duration: 0 } : springTransition}
-            className="rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[var(--accent-border)]"
+            className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-sm transition-all duration-500 hover:scale-[1.03] hover:border-[var(--accent-border)] hover:shadow-xl hover:shadow-[var(--accent)]/10"
           >
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-[var(--text-h)]">
+            <div
+              className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-[var(--accent-border)]/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+              aria-hidden="true"
+            />
+
+            <h3 className="relative z-10 mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-[var(--text-h)] transition-colors duration-300 group-hover:text-[var(--accent)]">
               {category.title}
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="relative z-10 flex flex-wrap gap-2">
               {category.technologies.map((tech) => (
                 <Badge key={tech}>{tech}</Badge>
               ))}

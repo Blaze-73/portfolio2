@@ -3,13 +3,14 @@ import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
 import { GithubIcon, LinkedinIcon, MailIcon } from '../ui/Icons'
 import LiquidEther from '../ui/LiquidEther'
+import { TechMarquee } from './TechMarquee'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { fadeUp, fadeIn, staggerContainer, springTransition } from '../../lib/animations'
 
 const socialLinks = [
-  { href: 'https://github.com/mouataz-bk', label: 'GitHub', Icon: GithubIcon },
-  { href: 'https://linkedin.com/in/mouatazbk', label: 'LinkedIn', Icon: LinkedinIcon },
-  { href: 'mailto:mouataz@example.com', label: 'Email', Icon: MailIcon },
+  { href: 'https://github.com/Blaze-73', label: 'GitHub', Icon: GithubIcon },
+  { href: 'https://linkedin.com/in/mouataz-billah-kachkach-67dih', label: 'LinkedIn', Icon: LinkedinIcon },
+  { href: 'mailto:kachkachmouataz@gmail.com', label: 'Email', Icon: MailIcon },
 ]
 
 export function LandingSection() {
@@ -46,22 +47,26 @@ export function LandingSection() {
           animate="visible"
           className="flex flex-col items-center text-center"
         >
-          <motion.span
+          <motion.div
             variants={fadeUp}
             transition={reducedMotion ? { duration: 0 } : springTransition}
-            className="mb-6 inline-block text-sm font-medium uppercase tracking-[0.25em] text-[var(--accent)]"
+            className="flex items-center justify-center gap-5 md:gap-8 lg:gap-10"
           >
-            Full Stack Web Developer
-          </motion.span>
-
-          <motion.h1
-            variants={fadeUp}
-            transition={reducedMotion ? { duration: 0 } : { ...springTransition, delay: 0.1 }}
-            className="max-w-4xl text-5xl font-bold leading-tight tracking-tight text-[var(--text-h)] md:text-7xl lg:text-8xl"
-          >
-            Mouataz Billah{' '}
-            <span className="text-[var(--accent)]">Kachkach</span>
-          </motion.h1>
+            <img
+              src="/pfp.jpg"
+              alt="Mouataz Billah Kachkach"
+              className="h-28 w-28 flex-shrink-0 rounded-full object-cover aspect-square ring-4 ring-[var(--accent)]/20 md:h-40 md:w-40 lg:h-48 lg:w-48"
+            />
+            <div className="text-left">
+              <span className="mb-2 block text-sm font-medium uppercase tracking-[0.25em] text-[var(--accent)]">
+                Full Stack Web Developer
+              </span>
+              <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--text-h)] md:text-5xl lg:text-6xl">
+                Mouataz Billah{' '}
+                <span className="text-[var(--accent)]">Kachkach</span>
+              </h1>
+            </div>
+          </motion.div>
 
           <motion.p
             variants={fadeUp}
@@ -104,6 +109,10 @@ export function LandingSection() {
           </motion.div>
         </motion.div>
       </Container>
+
+      <div className="absolute bottom-0 left-0 right-0">
+        <TechMarquee bordered={false} />
+      </div>
     </section>
   )
 }
