@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Section } from '../ui/Section'
 import { SectionHeader } from '../ui/SectionHeader'
-import { AnimatedCard } from '../ui/AnimatedCard'
+import { SpotlightCard } from '../ui/SpotlightCard'
 import { staggerContainer } from '../../lib/animations'
 
 const cards = [
@@ -48,7 +48,7 @@ export function AboutSection() {
         className="mt-16 grid gap-6 md:grid-cols-3"
       >
         {cards.map((card) => (
-          <AnimatedCard key={card.title}>
+          <SpotlightCard key={card.title}>
             <h3 className="mb-4 text-lg font-semibold text-[var(--text-h)]">
               {card.title}
             </h3>
@@ -63,7 +63,7 @@ export function AboutSection() {
                 </li>
               ))}
             </ul>
-          </AnimatedCard>
+          </SpotlightCard>
         ))}
       </motion.div>
     </Section>
