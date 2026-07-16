@@ -25,6 +25,8 @@ const categories = [
       'HTML5',
       'CSS3',
       'JavaScript',
+      'Bootstrap',
+      'jQuery',
       'TypeScript',
       'React',
       'Next.js',
@@ -36,7 +38,7 @@ const categories = [
   },
   {
     title: 'Backend',
-    technologies: ['PHP', 'Laravel', 'Node.js', 'Express.js', 'REST APIs'],
+    technologies: ['PHP', 'Laravel', 'Node.js', 'Express.js', 'REST APIs', 'Python'],
   },
   {
     title: 'Database',
@@ -44,7 +46,7 @@ const categories = [
   },
   {
     title: 'Tools',
-    technologies: ['Git', 'GitHub', 'Docker', 'Redis', 'Figma', 'Postman', 'VS Code'],
+    technologies: ['Git', 'GitHub', 'Docker', 'Redis', 'Figma', 'Postman', 'VS Code', 'WordPress', 'Jira', 'GitLab', 'Lyssna', 'BrowserStack'],
   },
   {
     title: 'Cloud & DevOps',
