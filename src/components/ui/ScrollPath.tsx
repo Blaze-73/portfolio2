@@ -16,8 +16,9 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
   const progressVal = useMotionValue(progress)
   useEffect(() => { progressVal.set(progress) }, [progress, progressVal])
   const smoothProgress = useSpring(progressVal, { stiffness: 100, damping: 24 })
-  const [dotPos, setDotPos] = useState({ x: 64, y: 0 })
+  const [dotPos, setDotPos] = useState({ x: 0, y: 0 })
   const [waypoints, setWaypoints] = useState<{ x: number; y: number }[]>([])
+  const lineX = 12
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   // Opacity driven by scroll activity
@@ -68,13 +69,11 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
       if (sectionIds.length === 0 || svgSize.height === 0) return []
       const margin = 60
       const scrollHeight = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)
-      return sectionIds.map((id, i) => {
+      return sectionIds.map((id) => {
         const el = document.getElementById(id)
         const raw = el ? el.offsetTop : 0
         const y = margin + ((raw / scrollHeight) * (svgSize.height - margin * 2))
-        const pad = svgSize.width * 0.18
-        const x = i % 2 === 0 ? pad : svgSize.width - pad
-        return { x, y }
+        return { x: lineX, y }
       })
     }
     const update = () => setWaypoints(calculate())
@@ -96,17 +95,7 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
 
   const pathD = useMemo(() => {
     if (waypoints.length < 2) return ''
-    let d = `M ${waypoints[0].x} ${waypoints[0].y}`
-    for (let i = 1; i < waypoints.length; i++) {
-      const prev = waypoints[i - 1]
-      const curr = waypoints[i]
-      const midY = (prev.y + curr.y) / 2
-      const tension = 0.4
-      const cp1x = prev.x + (curr.x - prev.x) * tension
-      const cp2x = curr.x - (curr.x - prev.x) * tension
-      d += ` C ${cp1x} ${midY}, ${cp2x} ${midY}, ${curr.x} ${curr.y}`
-    }
-    return d
+    return `M ${waypoints[0].x} ${waypoints[0].y} L ${waypoints[waypoints.length - 1].x} ${waypoints[waypoints.length - 1].y}`
   }, [waypoints])
 
   const updateDot = useCallback(() => {
@@ -134,7 +123,7 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed left-3 top-0 z-50 h-screen w-32 overflow-visible pointer-events-none"
+      className="fixed left-2 top-0 z-50 h-screen w-6 overflow-visible pointer-events-none max-lg:hidden"
       aria-hidden="true"
     >
       <svg
@@ -160,12 +149,15 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
           </linearGradient>
         </defs>
 
-        <path d={pathD} fill="none" stroke="var(--border)" strokeWidth="12" strokeOpacity={0.35 * o} />
-        <path ref={pathRef} d={pathD} fill="none" stroke="url(#pathGrad)" strokeWidth="14" />
+        <path ref={pathRef} d={pathD} fill="none" stroke="url(#pathGrad)" strokeWidth="2" strokeLinecap="round" />
 
-        <circle cx={dotPos.x} cy={dotPos.y} r="36" fill="var(--accent)" opacity={0.1 * Math.min(1, o * 2)} filter="url(#pathGlow)" />
-        <circle cx={dotPos.x} cy={dotPos.y} r="14" fill="var(--accent)" opacity={0.6 * o} />
-        <circle cx={dotPos.x} cy={dotPos.y} r="7" fill="#fff" opacity={0.8 * o} />
+        {waypoints.map((wp, i) => (
+          <circle key={i} cx={wp.x} cy={wp.y} r="3" fill="var(--border)" opacity={0.5 * o} />
+        ))}
+
+        <circle cx={dotPos.x} cy={dotPos.y} r="32" fill="var(--accent)" opacity={0.08 * Math.min(1, o * 2)} filter="url(#pathGlow)" />
+        <circle cx={dotPos.x} cy={dotPos.y} r="10" fill="var(--accent)" opacity={0.7 * o} />
+        <circle cx={dotPos.x} cy={dotPos.y} r="4" fill="#fff" opacity={0.9 * o} />
       </svg>
     </div>
   )

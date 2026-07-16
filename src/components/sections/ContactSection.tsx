@@ -62,9 +62,9 @@ export function ContactSection() {
   }
 
   const infoItems = [
-    { icon: MailIcon, label: 'mouataz@example.com', href: 'mailto:mouataz@example.com' },
-    { icon: GithubIcon, label: 'github.com/mouataz-bk', href: 'https://github.com/mouataz-bk' },
-    { icon: LinkedinIcon, label: 'linkedin.com/in/mouatazbk', href: 'https://linkedin.com/in/mouatazbk' },
+    { icon: MailIcon, label: 'kachkachmouataz@gmail.com', href: 'mailto:kachkachmouataz@gmail.com' },
+    { icon: GithubIcon, label: 'github.com/Blaze-73', href: 'https://github.com/Blaze-73' },
+    { icon: LinkedinIcon, label: 'linkedin.com/in/mouataz-billah-kachkach-67dih', href: 'https://linkedin.com/in/mouataz-billah-kachkach-67dih' },
     { icon: LocationIcon, label: 'Morocco — Remote / Worldwide', href: undefined },
   ]
 
@@ -124,7 +124,7 @@ export function ContactSection() {
               <p className="mt-1 text-sm text-[var(--text)]">
                 Let's build something great together.
               </p>
-              <Button href="mailto:mouataz@example.com" className="mt-4">
+              <Button href="mailto:kachkachmouataz@gmail.com" className="mt-4">
                 Start a Conversation
               </Button>
             </div>

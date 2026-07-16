@@ -1,6 +1,6 @@
 import { Section } from '../ui/Section'
 import { SectionHeader } from '../ui/SectionHeader'
-import ScrollStack, { ScrollStackItem } from '../ui/ScrollStack'
+import ScrollStack from '../ui/ScrollStack'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 const colors = [
@@ -96,9 +96,9 @@ export function WorkflowSection() {
           itemDistance={120}
         >
           {workflowSteps.map((step, i) => (
-            <ScrollStackItem key={step.step}>
+            <div key={step.step}>
               {renderCard(step, i)}
-            </ScrollStackItem>
+            </div>
           ))}
         </ScrollStack>
       </div>

@@ -1,0 +1,36 @@
+.decay-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: default;
+  aspect-ratio: 4 / 5;
+  transition: border-color 0.3s;
+}
+
+.decay-card:hover {
+  border-color: var(--accent-border);
+}
+
+.decay-card-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  will-change: transform;
+}
+
+.decay-card-content {
+  position: absolute;
+  inset: 0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+  pointer-events: none;
+}

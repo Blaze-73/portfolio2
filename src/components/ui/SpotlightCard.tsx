@@ -1,8 +1,12 @@
-import { useRef, useState, useCallback, type ReactNode } from 'react'
+import { useRef, useState, useCallback, useEffect, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '../../lib/utils'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { fadeUp, defaultTransition } from '../../lib/animations'
+import { PixelOverlay } from './PixelOverlay'
+
+const isTouch =
+  typeof window !== 'undefined' && 'ontouchstart' in window
 
 interface SpotlightCardProps {
   children: ReactNode
@@ -15,9 +19,14 @@ export function SpotlightCard({ children, className }: SpotlightCardProps) {
   const [spotlight, setSpotlight] = useState({ x: 50, y: 50, opacity: 0 })
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const [hover, setHover] = useState(false)
+  const touchTimer = useRef<ReturnType<typeof setTimeout>>()
+
+  useEffect(() => {
+    return () => clearTimeout(touchTimer.current)
+  }, [])
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current || reducedMotion) return
+    if (isTouch || !cardRef.current || reducedMotion) return
     const rect = cardRef.current.getBoundingClientRect()
     const x = ((e.clientX - rect.left) / rect.width) * 100
     const y = ((e.clientY - rect.top) / rect.height) * 100
@@ -31,13 +40,26 @@ export function SpotlightCard({ children, className }: SpotlightCardProps) {
   }, [reducedMotion])
 
   const handleMouseLeave = useCallback(() => {
-    setSpotlight({ x: 50, y: 50, opacity: 0 })
+    if (isTouch) return
     setTilt({ x: 0, y: 0 })
     setHover(false)
   }, [])
 
   const handleMouseEnter = useCallback(() => {
+    if (isTouch) return
     setHover(true)
+  }, [])
+
+  const handleClick = useCallback(() => {
+    if (!isTouch) return
+    setHover((prev) => {
+      const next = !prev
+      if (next) {
+        clearTimeout(touchTimer.current)
+        touchTimer.current = setTimeout(() => setHover(false), 2500)
+      }
+      return next
+    })
   }, [])
 
   return (
@@ -51,6 +73,9 @@ export function SpotlightCard({ children, className }: SpotlightCardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
       className={cn(
         'group relative overflow-hidden rounded-2xl p-px transition-all duration-500',
         hover && !reducedMotion ? 'shadow-lg shadow-[var(--accent)]/10' : 'shadow-sm',
@@ -73,19 +98,11 @@ export function SpotlightCard({ children, className }: SpotlightCardProps) {
                 background: hover
                   ? `radial-gradient(300px circle at ${spotlight.x}% ${spotlight.y}%, var(--accent-border), transparent 70%)`
                   : 'transparent',
-                opacity: spotlight.opacity,
+                opacity: hover ? 0.8 : 0,
               }
         }
         transition={{ duration: 0.3, ease: 'easeOut' }}
         style={{ pointerEvents: 'none' }}
-      />
-
-      <div
-        className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{
-          background: `linear-gradient(135deg, var(--accent-border) 0%, transparent 50%, var(--accent-border) 100%)`,
-          pointerEvents: 'none',
-        }}
       />
 
       <motion.div
@@ -102,7 +119,8 @@ export function SpotlightCard({ children, className }: SpotlightCardProps) {
         }
         transition={{ type: 'spring', stiffness: 250, damping: 25 }}
       >
-        {children}
+        <PixelOverlay hovered={hover} />
+        <div className="relative z-10">{children}</div>
       </motion.div>
     </motion.div>
   )

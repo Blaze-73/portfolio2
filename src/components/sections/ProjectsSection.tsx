@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Section } from '../ui/Section'
 import { SectionHeader } from '../ui/SectionHeader'
-import { ProjectCard } from '../ui/ProjectCard'
+import { MagicBento, type Project } from '../ui/MagicBento'
+import { ProjectDetail } from '../ui/ProjectDetail'
 import { staggerContainer, springTransition } from '../../lib/animations'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
@@ -50,6 +52,7 @@ const projects = [
 
 export function ProjectsSection() {
   const reducedMotion = useReducedMotion()
+  const [selected, setSelected] = useState<Project | null>(null)
 
   return (
     <Section id="projects">
@@ -64,21 +67,18 @@ export function ProjectsSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="mt-16 space-y-8"
+        transition={reducedMotion ? { duration: 0 } : springTransition}
+        className="mt-16"
       >
-        <motion.div
-          variants={staggerContainer}
-          transition={reducedMotion ? { duration: 0 } : springTransition}
-        >
-          <ProjectCard {...featuredProject} featured />
-        </motion.div>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
-          ))}
-        </div>
+        <MagicBento
+          projects={[featuredProject, ...projects]}
+          featuredIndex={0}
+          glowColor="132, 0, 255"
+          onProjectClick={(p) => setSelected(p)}
+        />
       </motion.div>
+
+      <ProjectDetail project={selected} onClose={() => setSelected(null)} />
     </Section>
   )
 }

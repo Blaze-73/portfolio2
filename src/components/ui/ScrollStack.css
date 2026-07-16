@@ -9,10 +9,6 @@
   padding: 10vh 0 8rem;
 }
 
-.scroll-stack-card-wrapper {
-  position: relative;
-}
-
 .scroll-stack-card {
   transform-origin: top center;
   will-change: transform;
@@ -20,9 +16,20 @@
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
   position: relative;
+  border-radius: 1rem;
+}
+
+.scroll-stack-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.scroll-stack-card + .scroll-stack-card {
+  margin-top: -2rem;
 }
 
 .scroll-stack-end {

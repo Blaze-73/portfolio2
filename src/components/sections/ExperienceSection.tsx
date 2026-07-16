@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Section } from '../ui/Section'
 import { SectionHeader } from '../ui/SectionHeader'
 import { Badge } from '../ui/Badge'
+import { HoverCard } from '../ui/HoverCard'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import {
   staggerContainer,
@@ -11,32 +12,32 @@ import {
 
 const experiences = [
   {
-    period: 'Nov 2025 — Present',
-    title: 'Full Stack Development Student',
+    period: '2023',
+    title: 'FST Tangier — Algorithms & Problem Solving',
     description:
-      'Studying Software Development Full Stack at OFPPT ISMONTIC. Building complete real-world applications with React, Next.js, Laravel, and modern tools.',
-    tags: ['React', 'Next.js', 'Laravel', 'TypeScript'],
+      'Studied at FST Tangier where I discovered algorithms and problem-solving. This is where I fell in love with coding and started my journey into software development.',
+    tags: ['Algorithms', 'Problem Solving', 'C'],
   },
   {
-    period: '2025',
-    title: 'Project — Fleur de Luxe',
+    period: '2024',
+    title: 'ISMONTIC Tangier — Web Development Foundations',
     description:
-      'Built a luxury flower e-commerce platform from scratch using Next.js, TypeScript, TailwindCSS, and Supabase. Focused on premium UX and performance.',
-    tags: ['Next.js', 'Supabase', 'E-commerce'],
+      'Started learning web development from scratch at ISMONTIC Tangier. Covered the fundamentals: HTML, CSS, and JavaScript, building a strong base for modern web development.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
   },
   {
-    period: '2025',
-    title: 'Project — AHAYZONE',
+    period: '2024',
+    title: 'ISMONTIC — Security & Kali Linux',
     description:
-      'Developed a multilingual art gallery and tourism platform with React, TailwindCSS, and Framer Motion animations. Showcasing Asilah\'s artistic culture.',
-    tags: ['React', 'Multilingual', 'Animations'],
+      'Studied security vulnerabilities and ethical hacking using Kali Linux. Learned to understand and test system security, gaining insights into how applications are attacked and defended.',
+    tags: ['Security', 'Kali Linux', 'Vulnerabilities'],
   },
   {
-    period: '2025',
-    title: 'Freelance-Ready Developer',
+    period: '2025 — Present',
+    title: 'ISMONTIC — Full Stack Development',
     description:
-      'Available for freelance opportunities and junior developer positions. Experienced in building full-stack applications with modern architectures.',
-    tags: ['Freelance', 'Full Stack', 'Available'],
+      'Second year focused on building real-world projects using modern frameworks. Applying all the knowledge gathered — from frontend to backend — to create complete full-stack applications.',
+    tags: ['React', 'Next.js', 'Laravel', 'Full Stack'],
   },
 ]
 
@@ -63,22 +64,25 @@ export function ExperienceSection() {
             key={exp.title}
             variants={fadeUp}
             transition={reducedMotion ? { duration: 0 } : springTransition}
-            className="group rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-sm transition-all duration-300 hover:shadow-md md:p-8"
           >
-            <span className="mb-2 block text-xs font-medium uppercase tracking-[0.15em] text-[var(--accent)]">
-              {exp.period}
-            </span>
-            <h3 className="text-lg font-semibold text-[var(--text-h)] group-hover:text-[var(--accent)] transition-colors duration-300">
-              {exp.title}
-            </h3>
-            <p className="mt-3 leading-relaxed text-[var(--text)]">
-              {exp.description}
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {exp.tags.map((tag) => (
-                <Badge key={tag}>{tag}</Badge>
-              ))}
-            </div>
+            <HoverCard>
+              <div className="p-6 md:p-8">
+                <span className="mb-2 block text-xs font-medium uppercase tracking-[0.15em] text-[var(--accent)]">
+                  {exp.period}
+                </span>
+                <h3 className="text-lg font-semibold text-[var(--text-h)] transition-colors duration-300">
+                  {exp.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-[var(--text)]">
+                  {exp.description}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {exp.tags.map((tag) => (
+                    <Badge key={tag}>{tag}</Badge>
+                  ))}
+                </div>
+              </div>
+            </HoverCard>
           </motion.div>
         ))}
       </motion.div>

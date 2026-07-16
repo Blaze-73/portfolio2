@@ -2,12 +2,21 @@ import { motion } from 'framer-motion'
 import { Section } from '../ui/Section'
 import { SectionHeader } from '../ui/SectionHeader'
 import { Badge } from '../ui/Badge'
+import { DecayCard } from '../ui/DecayCard'
 import {
   staggerContainer,
   fadeUp,
   springTransition,
 } from '../../lib/animations'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+
+const categoryColors = [
+  'oklch(0.28 0.12 255)',
+  'oklch(0.28 0.1 170)',
+  'oklch(0.28 0.1 85)',
+  'oklch(0.28 0.12 310)',
+  'oklch(0.28 0.1 20)',
+]
 
 const categories = [
   {
@@ -43,6 +52,22 @@ const categories = [
   },
 ]
 
+const Title = ({ children }: { children: string }) => (
+  <h3 className="relative mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-white/90">
+    {children}
+  </h3>
+)
+
+const TechList = ({ items }: { items: string[] }) => (
+  <div className="relative flex flex-wrap justify-center gap-1.5">
+    {items.map((tech) => (
+      <Badge key={tech} className="bg-black/20 text-white/80 backdrop-blur-sm border-white/10">
+        {tech}
+      </Badge>
+    ))}
+  </div>
+)
+
 export function TechStackSection() {
   const reducedMotion = useReducedMotion()
 
@@ -54,36 +79,37 @@ export function TechStackSection() {
         subtitle="Technologies I use regularly to build modern, scalable web applications."
       />
 
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
-        className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
-      >
-        {categories.map((category) => (
-          <motion.div
-            key={category.title}
-            variants={fadeUp}
-            transition={reducedMotion ? { duration: 0 } : springTransition}
-            className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-sm transition-all duration-500 hover:scale-[1.03] hover:border-[var(--accent-border)] hover:shadow-xl hover:shadow-[var(--accent)]/10"
-          >
-            <div
-              className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-[var(--accent-border)]/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-              aria-hidden="true"
-            />
-
-            <h3 className="relative z-10 mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-[var(--text-h)] transition-colors duration-300 group-hover:text-[var(--accent)]">
-              {category.title}
-            </h3>
-            <div className="relative z-10 flex flex-wrap gap-2">
-              {category.technologies.map((tech) => (
-                <Badge key={tech}>{tech}</Badge>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+      {reducedMotion ? (
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {categories.map((category, i) => (
+            <DecayCard key={category.title} fill={categoryColors[i]}>
+              <Title>{category.title}</Title>
+              <TechList items={category.technologies} />
+            </DecayCard>
+          ))}
+        </div>
+      ) : (
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+        >
+          {categories.map((category, i) => (
+            <motion.div
+              key={category.title}
+              variants={fadeUp}
+              transition={reducedMotion ? { duration: 0 } : springTransition}
+            >
+              <DecayCard fill={categoryColors[i]}>
+                <Title>{category.title}</Title>
+                <TechList items={category.technologies} />
+              </DecayCard>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
     </Section>
   )
 }
