@@ -4,13 +4,13 @@ import ScrollStack from '../ui/ScrollStack'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 const colors = [
-  { border: '#f43f5e', bg: '#2d111b', text: '#f43f5e' },
-  { border: '#f97316', bg: '#2d180e', text: '#f97316' },
-  { border: '#eab308', bg: '#2d250e', text: '#eab308' },
-  { border: '#22c55e', bg: '#0e2d16', text: '#22c55e' },
-  { border: '#14b8a6', bg: '#0e2d28', text: '#14b8a6' },
-  { border: '#3b82f6', bg: '#0e1a2d', text: '#3b82f6' },
-  { border: '#a855f7', bg: '#1f0e2d', text: '#a855f7' },
+  { border: '#fb7185', bg: '#3b0f18', text: '#fb7185' },
+  { border: '#fbbf24', bg: '#3b2f08', text: '#fbbf24' },
+  { border: '#a3e635', bg: '#1d3b08', text: '#a3e635' },
+  { border: '#2dd4bf', bg: '#083b33', text: '#2dd4bf' },
+  { border: '#60a5fa', bg: '#0f233b', text: '#60a5fa' },
+  { border: '#818cf8', bg: '#1a133b', text: '#818cf8' },
+  { border: '#e879f9', bg: '#3b0f2d', text: '#e879f9' },
 ]
 
 const workflowSteps = [

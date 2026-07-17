@@ -1,3 +1,4 @@
+import { ThemeProvider } from './hooks/useTheme'
 import { ScrollPath } from './components/ui/ScrollPath'
 import { Navbar } from './components/ui/Navbar'
 import { LandingSection } from './components/sections/LandingSection'
@@ -7,7 +8,6 @@ import { TechStackSection } from './components/sections/TechStackSection'
 import { ProjectsSection } from './components/sections/ProjectsSection'
 import { GitHubSection } from './components/sections/GitHubSection'
 import { ExperienceSection } from './components/sections/ExperienceSection'
-import { NumbersSection } from './components/sections/NumbersSection'
 import { ContactSection } from './components/sections/ContactSection'
 
 const SECTION_IDS = [
@@ -18,13 +18,12 @@ const SECTION_IDS = [
   'projects',
   'github',
   'experience',
-  'numbers',
   'contact',
 ]
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <Navbar sectionIds={SECTION_IDS} />
       <ScrollPath sectionIds={SECTION_IDS} />
       <LandingSection />
@@ -34,9 +33,8 @@ function App() {
       <ProjectsSection />
       <GitHubSection />
       <ExperienceSection />
-      <NumbersSection />
       <ContactSection />
-    </>
+    </ThemeProvider>
   )
 }
 

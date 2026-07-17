@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '../../lib/utils'
+import { ThemeToggle } from './ThemeToggle'
 
 interface NavbarProps {
   sectionIds: string[]
@@ -14,7 +15,6 @@ const labels: Record<string, string> = {
   projects: 'Projects',
   github: 'GitHub',
   experience: 'Experience',
-  numbers: 'Numbers',
   contact: 'Contact',
 }
 
@@ -97,6 +97,7 @@ export function Navbar({ sectionIds }: NavbarProps) {
           </a>
 
           <div className="hidden md:flex items-center gap-1">
+            <ThemeToggle />
             {sectionIds.map((id) => (
               <a
                 key={id}

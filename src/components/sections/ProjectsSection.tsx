@@ -14,10 +14,18 @@ const featuredProject = {
   technologies: ['Laravel', 'React', 'REST API', 'Auth'],
   github: 'https://github.com/mouataz-bk/gym-management',
   demo: 'https://alien-gym-management.vercel.app/',
-  image: '/gympic.png',
+  image: '/images/gympic.png',
 }
 
 const projects = [
+  {
+    title: 'Riad Assilah',
+    description:
+      'A boutique riad guesthouse website with multilingual support (FR/EN/AR), room management, booking system, image gallery, and JWT-authenticated admin panel.',
+    technologies: ['React', 'Express.js', 'MongoDB', 'TailwindCSS', 'Framer Motion', 'i18next'],
+    demo: 'https://riad-assilah-client.vercel.app',
+    image: '/images/riad.png',
+  },
   {
     title: 'Fleur de Luxe',
     description:
@@ -25,6 +33,7 @@ const projects = [
     technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Supabase'],
     github: 'https://github.com/mouataz-bk/fleur-de-luxe',
     demo: 'https://fleur-de-luxe.vercel.app',
+    image: '/images/fleure.png',
   },
   {
     title: 'AHAYZONE',
@@ -33,6 +42,7 @@ const projects = [
     technologies: ['React', 'TailwindCSS', 'Framer Motion'],
     github: 'https://github.com/mouataz-bk/ahayzone',
     demo: 'https://ahayzone.vercel.app',
+    image: '/images/ahayzone.png',
   },
   {
     title: 'Pharmacy Platform',
@@ -40,6 +50,7 @@ const projects = [
       'Medicine management platform with a modern React frontend and Laravel backend. Features authentication, inventory, and responsive UI.',
     technologies: ['React', 'Laravel', 'MySQL'],
     github: 'https://github.com/mouataz-bk/pharmacy-platform',
+    image: '/images/para.png',
   },
   {
     title: 'Centre Hassan II',
@@ -72,7 +83,6 @@ export function ProjectsSection() {
       >
         <MagicBento
           projects={[featuredProject, ...projects]}
-          featuredIndex={0}
           glowColor="132, 0, 255"
           onProjectClick={(p) => setSelected(p)}
         />

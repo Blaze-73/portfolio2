@@ -21,7 +21,6 @@ export interface Project {
 
 interface MagicBentoProps {
   projects: Project[]
-  featuredIndex?: number
   textAutoHide?: boolean
   enableStars?: boolean
   enableSpotlight?: boolean
@@ -390,7 +389,6 @@ function useMobile() {
 
 export function MagicBento({
   projects,
-  featuredIndex = 0,
   textAutoHide = true,
   enableSpotlight = true,
   enableBorderGlow = true,
@@ -406,9 +404,6 @@ export function MagicBento({
   const disabled = isMobile
 
   if (!projects.length) return null
-
-  const allProjects = [...projects]
-  const featured = allProjects.splice(featuredIndex, 1)[0]
 
   return (
     <>
@@ -431,43 +426,8 @@ export function MagicBento({
           } as HTMLAttributes<HTMLDivElement>['style']
         }
       >
-        {featured && (
-          <div className="mb-card mb-card--featured">
-            <ParticleCard
-              className={`mb-card ${textAutoHide ? 'mb-card--autohide' : ''} ${enableBorderGlow ? 'mb-card--border-glow' : ''}`}
-              disableAnimations={disabled}
-              particleCount={particleCount}
-              glowColor={glowColor}
-              enableTilt={false}
-              enableMagnetism={false}
-              onClick={() => onProjectClick?.(featured)}
-            >
-              {featured.image && (
-                <img
-                  src={featured.image}
-                  alt=""
-                  className="mb-card-bg"
-                  aria-hidden="true"
-                />
-              )}
-              <div className="mb-card-overlay" />
-              <div className="mb-card-body">
-                <h3 className="mb-card-title">{featured.title}</h3>
-                <p className="mb-card-desc">{featured.description}</p>
-                <div className="mb-card-tech">
-                  {featured.technologies.map((t) => (
-                    <span key={t} className="mb-card-tech-badge">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </ParticleCard>
-          </div>
-        )}
-
         <div className="mb-grid">
-          {allProjects.map((project) => (
+          {projects.map((project) => (
             <ParticleCard
               key={project.title}
               className={`mb-card ${textAutoHide ? 'mb-card--autohide' : ''} ${enableBorderGlow ? 'mb-card--border-glow' : ''}`}

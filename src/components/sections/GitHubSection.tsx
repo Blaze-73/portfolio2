@@ -3,9 +3,8 @@ import {
   useEffect,
   useRef,
   useCallback,
-  type ReactNode,
 } from 'react'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { Section } from '../ui/Section'
 import { SectionHeader } from '../ui/SectionHeader'
 import { Button } from '../ui/Button'
@@ -266,10 +265,24 @@ function ContributionGrid() {
 
   const getColor = (level: number) => {
     if (level === 0) return 'var(--border)'
-    if (level === 1) return 'rgba(170, 59, 255, 0.15)'
-    if (level === 2) return 'rgba(170, 59, 255, 0.3)'
-    if (level === 3) return 'rgba(170, 59, 255, 0.55)'
-    return 'var(--accent)'
+    if (level === 1) return 'rgba(34, 197, 94, 0.15)'
+    if (level === 2) return 'rgba(34, 197, 94, 0.3)'
+    if (level === 3) return 'rgba(34, 197, 94, 0.55)'
+    return 'rgba(34, 197, 94, 0.85)'
+  }
+
+  const cellVariants: Variants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: (i: number) => ({
+      scale: 1,
+      opacity: 1,
+      transition: {
+        delay: i * 0.004,
+        type: 'spring',
+        stiffness: 200,
+        damping: 15,
+      },
+    }),
   }
 
   return (
@@ -296,21 +309,26 @@ function ContributionGrid() {
       </div>
       <motion.div
         className="flex gap-[3px]"
-        initial={inView ? {} : { opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5 }}
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
       >
         {grid.map((week, wi) => (
           <div key={wi} className="flex flex-col gap-[3px]">
             {week.map((day, di) => (
-              <span
+              <motion.span
                 key={di}
+                custom={wi * days + di}
+                variants={cellVariants}
                 className="rounded-sm"
                 style={{
                   width: 10,
                   height: 10,
                   backgroundColor: getColor(day),
-                  transition: 'background-color 0.3s ease',
+                }}
+                whileHover={{
+                  scale: 1.8,
+                  backgroundColor: 'rgba(34, 197, 94, 1)',
+                  transition: { duration: 0.15 },
                 }}
               />
             ))}

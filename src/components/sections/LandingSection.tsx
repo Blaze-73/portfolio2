@@ -53,9 +53,9 @@ export function LandingSection() {
             className="flex items-center justify-center gap-5 md:gap-8 lg:gap-10"
           >
             <img
-              src="/pfp.jpg"
+              src="/images/pfp.png"
               alt="Mouataz Billah Kachkach"
-              className="h-28 w-28 flex-shrink-0 rounded-full object-cover aspect-square ring-4 ring-[var(--accent)]/20 md:h-40 md:w-40 lg:h-48 lg:w-48"
+              className="h-36 w-36 flex-shrink-0 object-cover aspect-square ring-4 ring-[var(--accent)]/20 md:h-48 md:w-48 lg:h-56 lg:w-56"
             />
             <div className="text-left">
               <span className="mb-2 block text-sm font-medium uppercase tracking-[0.25em] text-[var(--accent)]">
