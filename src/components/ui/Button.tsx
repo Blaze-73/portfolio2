@@ -7,6 +7,7 @@ interface ButtonProps {
   href?: string
   type?: 'button' | 'submit' | 'reset'
   className?: string
+  disabled?: boolean
   onClick?: () => void
 }
 
@@ -21,8 +22,8 @@ const variants = {
   ghost: 'text-[var(--text)] hover:text-[var(--text-h)]',
 }
 
-export function Button({ children, variant = 'primary', href, type, className, onClick }: ButtonProps) {
-  const classes = cn(baseStyles, variants[variant], className)
+export function Button({ children, variant = 'primary', href, type, className, disabled, onClick }: ButtonProps) {
+  const classes = cn(baseStyles, variants[variant], disabled && 'pointer-events-none opacity-50', className)
 
   if (href) {
     return (
@@ -33,7 +34,7 @@ export function Button({ children, variant = 'primary', href, type, className, o
   }
 
   return (
-    <button type={type ?? 'button'} onClick={onClick} className={classes}>
+    <button type={type ?? 'button'} onClick={onClick} disabled={disabled} className={classes}>
       {children}
     </button>
   )

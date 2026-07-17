@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
 import { GithubIcon, LinkedinIcon, MailIcon } from '../ui/Icons'
-import LiquidEther from '../ui/LiquidEther'
 import { TechMarquee } from './TechMarquee'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { fadeUp, fadeIn, staggerContainer, springTransition } from '../../lib/animations'
@@ -21,24 +20,8 @@ export function LandingSection() {
       id="landing"
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute inset-0 z-0">
-          <LiquidEther
-            colors={['#aa3bff', '#7c3aed', '#5227FF']}
-            autoDemo={!reducedMotion}
-            resolution={0.35}
-            mouseForce={15}
-            cursorSize={80}
-            autoSpeed={0.3}
-            autoIntensity={1.5}
-            takeoverDuration={0.3}
-            autoResumeDelay={2000}
-            style={{ opacity: 0.3 }}
-          />
-        </div>
-        <div className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-[var(--accent)] opacity-[0.03] blur-[120px]" />
-        <div className="absolute -right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-[var(--accent)] opacity-[0.02] blur-[100px]" />
-      </div>
+      <div className="absolute -left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-[var(--accent)] opacity-[0.03] blur-[120px] pointer-events-none" aria-hidden="true" />
+      <div className="absolute -right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-[var(--accent)] opacity-[0.02] blur-[100px] pointer-events-none" aria-hidden="true" />
 
       <Container>
         <motion.div

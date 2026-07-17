@@ -12,7 +12,7 @@ const featuredProject = {
   description:
     'Full-stack management platform with member management, admin dashboard, authentication, and REST API built with Laravel and React.',
   technologies: ['Laravel', 'React', 'REST API', 'Auth'],
-  github: 'https://github.com/mouataz-bk/gym-management',
+  github: 'https://github.com/Blaze-73/gym-management',
   demo: 'https://alien-gym-management.vercel.app/',
   image: '/images/gympic.png',
 }
@@ -27,12 +27,12 @@ const projects = [
     image: '/images/riad.png',
   },
   {
-    title: 'Fleur de Luxe',
+    title: 'Najiya Flowers',
     description:
       'A luxury flower e-commerce platform with a premium shopping experience. Built with Next.js, TypeScript, and TailwindCSS, featuring a product catalog, cart, checkout flow, and Supabase backend.',
     technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Supabase'],
-    github: 'https://github.com/mouataz-bk/fleur-de-luxe',
-    demo: 'https://fleur-de-luxe.vercel.app',
+    github: 'https://github.com/Blaze-73/fleur-de-luxe',
+    demo: 'https://najiya-flowers.vercel.app',
     image: '/images/fleure.png',
   },
   {
@@ -40,16 +40,17 @@ const projects = [
     description:
       'Modern art gallery and tourism platform showcasing Asilah\'s artistic culture. Features multilingual support, responsive gallery, and smooth animations.',
     technologies: ['React', 'TailwindCSS', 'Framer Motion'],
-    github: 'https://github.com/mouataz-bk/ahayzone',
+    github: 'https://github.com/Blaze-73/ahayzone',
     demo: 'https://ahayzone.vercel.app',
     image: '/images/ahayzone.png',
   },
   {
-    title: 'Pharmacy Platform',
+    title: 'Parapharmacy',
     description:
       'Medicine management platform with a modern React frontend and Laravel backend. Features authentication, inventory, and responsive UI.',
     technologies: ['React', 'Laravel', 'MySQL'],
-    github: 'https://github.com/mouataz-bk/pharmacy-platform',
+    github: 'https://github.com/Blaze-73/pharmacy-platform',
+    demo: 'https://parapharmacyy.vercel.app',
     image: '/images/para.png',
   },
   {
@@ -57,7 +58,9 @@ const projects = [
     description:
       'Modern platform built with React and Laravel for the Centre Hassan II cultural institution.',
     technologies: ['React', 'Laravel', 'PostgreSQL'],
-    github: 'https://github.com/mouataz-bk/centre-hassan2',
+    github: 'https://github.com/Blaze-73/centre-hassan2',
+    demo: 'https://centre-hassan-2-front.vercel.app',
+    image: '/images/ch2.png',
   },
 ]
 

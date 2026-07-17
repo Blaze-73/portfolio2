@@ -136,6 +136,16 @@ export function Navbar({ sectionIds }: NavbarProps) {
             className="overflow-hidden border-t border-[var(--border)]/50"
           >
             <div className="mx-auto max-w-7xl px-6 py-4 space-y-1">
+              <motion.div
+                initial={{ opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center justify-between px-4 py-2.5"
+              >
+                <span className="text-sm font-medium text-[var(--text)]">Theme</span>
+                <ThemeToggle />
+              </motion.div>
+              <hr className="border-[var(--border)]/50" />
               {sectionIds.map((id, i) => (
                 <motion.a
                   key={id}

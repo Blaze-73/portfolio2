@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 import { Section } from '../ui/Section'
 import { SectionHeader } from '../ui/SectionHeader'
 import { Button } from '../ui/Button'
@@ -25,12 +26,17 @@ const initialForm: FormState = { name: '', email: '', message: '' }
 function validate(form: FormState): FormErrors {
   const errors: FormErrors = {}
   if (!form.name.trim()) errors.name = 'Name is required'
+  if (form.name.length > 200) errors.name = 'Name is too long'
   if (!form.email.trim()) {
     errors.email = 'Email is required'
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
     errors.email = 'Invalid email address'
+  } else if (form.email.length > 320) {
+    errors.email = 'Email is too long'
   }
   if (!form.message.trim()) errors.message = 'Message is required'
+  else if (form.message.length > 5000) errors.message = 'Message is too long'
+  else if (form.message.trim().length < 10) errors.message = 'Message must be at least 10 characters'
   return errors
 }
 
@@ -38,10 +44,15 @@ export function ContactSection() {
   const [form, setForm] = useState<FormState>(initialForm)
   const [errors, setErrors] = useState<FormErrors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState(false)
   const reducedMotion = useReducedMotion()
 
   const handleChange = (field: keyof FormState, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }))
+    const sanitized = value
+      .replace(/<[^>]*>/g, '')
+      .trimStart()
+    setForm((prev) => ({ ...prev, [field]: sanitized }))
     if (errors[field]) {
       setErrors((prev) => {
         const next = { ...prev }
@@ -51,14 +62,43 @@ export function ContactSection() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSendError(false)
     const validation = validate(form)
     if (Object.keys(validation).length > 0) {
       setErrors(validation)
       return
     }
-    setSubmitted(true)
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+    if (!serviceId || !templateId || !publicKey) {
+      setSendError(true)
+      return
+    }
+
+    setSending(true)
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          time: new Date().toLocaleString(),
+        },
+        publicKey,
+      )
+      setSubmitted(true)
+    } catch {
+      setSendError(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   const infoItems = [
@@ -217,8 +257,13 @@ export function ContactSection() {
                 )}
               </div>
 
-              <Button type="submit" className="w-full">
-                Send Message
+              {sendError && (
+                <p className="text-xs text-red-500 text-center">
+                  Failed to send. Check your EmailJS config or try again later.
+                </p>
+              )}
+              <Button type="submit" className="w-full" disabled={sending}>
+                {sending ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
           )}

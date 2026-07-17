@@ -18,10 +18,10 @@ import {
 } from '../../lib/animations'
 
 const stats = [
-  { label: 'Repositories', value: 40, suffix: '+' },
-  { label: 'Followers', value: 120, suffix: '+' },
-  { label: 'Following', value: 60, suffix: '+' },
-  { label: 'Contributions', value: 2500, suffix: '+' },
+  { label: 'Repositories', value: 25, suffix: '+' },
+  { label: 'Followers', value: 15, suffix: '+' },
+  { label: 'Following', value: 10, suffix: '+' },
+  { label: 'Contributions', value: 600, suffix: '+' },
 ]
 
 const repoLines = [
@@ -377,7 +377,7 @@ export function GitHubSection() {
               reducedMotion ? { duration: 0 } : { ...springTransition, delay: 0.2 }
             }
           >
-            <Button href="https://github.com/mouataz-bk" variant="secondary">
+            <Button href="https://github.com/Blaze-73" variant="secondary">
               View GitHub Profile →
             </Button>
           </motion.div>

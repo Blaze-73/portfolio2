@@ -13,30 +13,30 @@ import {
 const experiences = [
   {
     period: '2023',
-    title: 'FST Tangier ÔÇö Algorithms & Problem Solving',
+    title: 'FST Tangier — Algorithms & Problem Solving',
     description:
       'Studied at FST Tangier where I discovered algorithms and problem-solving. This is where I fell in love with coding and started my journey into software development.',
     tags: ['Algorithms', 'Problem Solving', 'C'],
   },
   {
     period: '2024',
-    title: 'ISMONTIC Tangier ÔÇö Web Development Foundations',
+    title: 'ISMONTIC Tangier — Web Development Foundations',
     description:
       'Started learning web development from scratch at ISMONTIC Tangier. Covered the fundamentals: HTML, CSS, and JavaScript, building a strong base for modern web development.',
     tags: ['HTML', 'CSS', 'JavaScript'],
   },
   {
     period: '2024',
-    title: 'ISMONTIC ÔÇö Security & Kali Linux',
+    title: 'ISMONTIC — Security & Kali Linux',
     description:
       'Studied security vulnerabilities and ethical hacking using Kali Linux. Learned to understand and test system security, gaining insights into how applications are attacked and defended.',
     tags: ['Security', 'Kali Linux', 'Vulnerabilities'],
   },
   {
-    period: '2025 ÔÇö Present',
-    title: 'ISMONTIC ÔÇö Full Stack Development',
+    period: '2025 — Present',
+    title: 'ISMONTIC — Full Stack Development',
     description:
-      'Second year focused on building real-world projects using modern frameworks. Applying all the knowledge gathered ÔÇö from frontend to backend ÔÇö to create complete full-stack applications.',
+      'Second year focused on building real-world projects using modern frameworks. Applying all the knowledge gathered — from frontend to backend — to create complete full-stack applications.',
     tags: ['React', 'Next.js', 'Laravel', 'Full Stack'],
   },
 ]

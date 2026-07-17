@@ -67,7 +67,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
           />
 
           <motion.div
-            className="relative z-10 flex w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg)] shadow-2xl sm:flex-row"
+            className="relative z-10 flex w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg)] shadow-2xl"
             variants={panel}
             initial="hidden"
             animate="visible"
@@ -96,25 +96,24 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             </button>
 
             {/* Image */}
-            <div className="relative min-h-[220px] shrink-0 sm:w-[45%] sm:min-h-[400px]">
+            <div className="relative h-[280px] w-full shrink-0 sm:h-[380px]">
               {project.image ? (
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="h-full w-full object-contain bg-[var(--code-bg)] p-2"
                 />
               ) : (
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[var(--accent-bg)] to-transparent">
+                <div className="flex h-full items-center justify-center bg-gradient-to-br from-[var(--accent-bg)] to-transparent">
                   <span className="text-6xl font-bold text-[var(--accent)]/20 select-none">
                     {project.title.charAt(0)}
                   </span>
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-transparent to-transparent sm:bg-gradient-to-r sm:from-transparent sm:via-transparent sm:to-[var(--bg)]" />
             </div>
 
             {/* Content */}
-            <div className="flex flex-col justify-center p-6 sm:p-8 sm:w-[55%]">
+            <div className="flex flex-col p-6 sm:p-8">
               <h2 className="text-2xl font-bold text-[var(--text-h)] sm:text-3xl">
                 {project.title}
               </h2>
