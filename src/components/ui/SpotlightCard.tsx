@@ -19,7 +19,7 @@ export function SpotlightCard({ children, className }: SpotlightCardProps) {
   const [spotlight, setSpotlight] = useState({ x: 50, y: 50, opacity: 0 })
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const [hover, setHover] = useState(false)
-  const touchTimer = useRef<ReturnType<typeof setTimeout>>()
+  const touchTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useEffect(() => {
     return () => clearTimeout(touchTimer.current)

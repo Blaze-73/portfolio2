@@ -665,6 +665,7 @@ export default function LiquidEther({
         this.scene!.add(this.line)
       }
 
+      // @ts-expect-error ShaderPass.update() has different signature
       update({ dt, isBounce, BFECC }: { dt: number; isBounce: boolean; BFECC: boolean }) {
         this.uniforms.dt.value = dt
         if (this.line) this.line.visible = isBounce
@@ -681,6 +682,7 @@ export default function LiquidEther({
         this.init(simProps)
       }
 
+      // @ts-expect-error ShaderPass.init() has different signature
       init(simProps: any) {
         super.init()
         const mouseG = new THREE.PlaneGeometry(1, 1)
@@ -705,6 +707,7 @@ export default function LiquidEther({
         this.scene!.add(this.mouse)
       }
 
+      // @ts-expect-error ShaderPass.update() has different signature
       update(props: any) {
         const forceX = (Mouse.diff.x / 2) * props.mouse_force
         const forceY = (Mouse.diff.y / 2) * props.mouse_force
@@ -758,6 +761,7 @@ export default function LiquidEther({
         this.init()
       }
 
+      // @ts-expect-error ShaderPass.update() has different signature
       update({
         viscous,
         iterations,
@@ -805,6 +809,7 @@ export default function LiquidEther({
         this.init()
       }
 
+      // @ts-expect-error ShaderPass.update() has different signature
       update({ vel }: { vel: any }) {
         this.uniforms.velocity.value = vel.texture
         super.update()
@@ -832,6 +837,7 @@ export default function LiquidEther({
         this.init()
       }
 
+      // @ts-expect-error ShaderPass.update() has different signature
       update({ iterations }: { iterations: number }) {
         let p_in: any, p_out: any
         for (let i = 0; i < iterations; i++) {
@@ -870,6 +876,7 @@ export default function LiquidEther({
         this.init()
       }
 
+      // @ts-expect-error ShaderPass.update() has different signature
       update({
         vel,
         pressure,
@@ -904,7 +911,7 @@ export default function LiquidEther({
       poisson: Poisson | null = null
       pressure: Pressure | null = null
 
-      constructor(options: any) {
+      constructor(options?: any) {
         this.options = {
           iterations_poisson: 32,
           iterations_viscous: 32,

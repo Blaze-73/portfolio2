@@ -16,7 +16,7 @@ export function HoverCard({ children, className }: HoverCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
   const [hover, setHover] = useState(false)
-  const touchTimer = useRef<ReturnType<typeof setTimeout>>()
+  const touchTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const mouseX = useMotionValue(0.5)
   const mouseY = useMotionValue(0.5)
@@ -32,7 +32,7 @@ export function HoverCard({ children, className }: HoverCardProps) {
 
   const glowX = useSpring(mouseX, { stiffness: 120, damping: 20 })
   const glowY = useSpring(mouseY, { stiffness: 120, damping: 20 })
-  const glowBg = useTransform([glowX, glowY], ([x, y]) => {
+  const glowBg = useTransform([glowX, glowY], ([x, y]: number[]) => {
     const cx = Math.round(x * 100)
     const cy = Math.round(y * 100)
     return `radial-gradient(circle at ${cx}% ${cy}%, var(--accent-border), transparent 65%)`

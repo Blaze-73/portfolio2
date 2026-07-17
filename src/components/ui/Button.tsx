@@ -5,6 +5,7 @@ interface ButtonProps {
   children: ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
   href?: string
+  type?: 'button' | 'submit' | 'reset'
   className?: string
   onClick?: () => void
 }
@@ -20,7 +21,7 @@ const variants = {
   ghost: 'text-[var(--text)] hover:text-[var(--text-h)]',
 }
 
-export function Button({ children, variant = 'primary', href, className, onClick }: ButtonProps) {
+export function Button({ children, variant = 'primary', href, type, className, onClick }: ButtonProps) {
   const classes = cn(baseStyles, variants[variant], className)
 
   if (href) {
@@ -32,7 +33,7 @@ export function Button({ children, variant = 'primary', href, className, onClick
   }
 
   return (
-    <button type="button" onClick={onClick} className={classes}>
+    <button type={type ?? 'button'} onClick={onClick} className={classes}>
       {children}
     </button>
   )

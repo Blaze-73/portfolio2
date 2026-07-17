@@ -4,13 +4,13 @@ import ScrollStack from '../ui/ScrollStack'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 const colors = [
-  { border: '#fb7185', bg: '#3b0f18', text: '#fb7185' },
-  { border: '#fbbf24', bg: '#3b2f08', text: '#fbbf24' },
-  { border: '#a3e635', bg: '#1d3b08', text: '#a3e635' },
-  { border: '#2dd4bf', bg: '#083b33', text: '#2dd4bf' },
-  { border: '#60a5fa', bg: '#0f233b', text: '#60a5fa' },
-  { border: '#818cf8', bg: '#1a133b', text: '#818cf8' },
-  { border: '#e879f9', bg: '#3b0f2d', text: '#e879f9' },
+  { border: '#fda4af', bg: '#881337', text: '#fecdd3' },
+  { border: '#fde68a', bg: '#78350f', text: '#fef3c7' },
+  { border: '#bef264', bg: '#365314', text: '#d9f99d' },
+  { border: '#5eead4', bg: '#115e59', text: '#ccfbf1' },
+  { border: '#93c5fd', bg: '#1e3a5f', text: '#dbeafe' },
+  { border: '#a5b4fc', bg: '#312e81', text: '#e0e7ff' },
+  { border: '#f0abfc', bg: '#701a75', text: '#fae8ff' },
 ]
 
 const workflowSteps = [
@@ -37,9 +37,15 @@ export function WorkflowSection() {
           backgroundColor: c.bg,
         }}
       >
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%, rgba(255,255,255,0.03) 100%)`,
+          }}
+        />
         <span
-          className="absolute right-4 top-2 select-none text-[4.5rem]/none font-black leading-none opacity-10 md:text-[7rem]"
-          style={{ color: c.text, fontFamily: 'ui-monospace, SFMono-Regular, monospace' }}
+          className="absolute right-4 top-2 select-none text-[4.5rem]/none font-black leading-none opacity-15 md:text-[7rem]"
+          style={{ color: c.border, fontFamily: 'ui-monospace, SFMono-Regular, monospace' }}
         >
           {step.step}
         </span>
@@ -51,11 +57,11 @@ export function WorkflowSection() {
         </span>
         <h3
           className="relative mb-3 text-2xl font-bold md:text-3xl"
-          style={{ color: c.text }}
+          style={{ color: '#f8fafc' }}
         >
           {step.title}
         </h3>
-        <p className="relative max-w-2xl leading-relaxed opacity-85 text-[var(--text)]">
+        <p className="relative max-w-2xl leading-relaxed text-white/70">
           {step.description}
         </p>
       </div>
