@@ -1,4 +1,6 @@
+import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider } from './hooks/useTheme'
+import { SEOHead } from './components/ui/SEOHead'
 import { ScrollPath } from './components/ui/ScrollPath'
 import { Navbar } from './components/ui/Navbar'
 import { LandingSection } from './components/sections/LandingSection'
@@ -27,36 +29,39 @@ function App() {
   const reducedMotion = useReducedMotion()
 
   return (
-    <ThemeProvider>
-      <div className="relative">
-        <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
-          <LiquidEther
-            colors={['#aa3bff', '#7c3aed', '#5227FF']}
-            autoDemo={!reducedMotion}
-            resolution={0.35}
-            mouseForce={15}
-            cursorSize={80}
-            autoSpeed={0.3}
-            autoIntensity={1.5}
-            takeoverDuration={0.3}
-            autoResumeDelay={2000}
-            style={{ opacity: 0.15 }}
-          />
+    <HelmetProvider>
+      <ThemeProvider>
+        <SEOHead />
+        <div className="relative">
+          <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+            <LiquidEther
+              colors={['#aa3bff', '#7c3aed', '#5227FF']}
+              autoDemo={!reducedMotion}
+              resolution={0.35}
+              mouseForce={15}
+              cursorSize={80}
+              autoSpeed={0.3}
+              autoIntensity={1.5}
+              takeoverDuration={0.3}
+              autoResumeDelay={2000}
+              style={{ opacity: 0.15 }}
+            />
+          </div>
+          <div className="relative z-10">
+            <Navbar sectionIds={SECTION_IDS} />
+            <ScrollPath sectionIds={SECTION_IDS} />
+            <LandingSection />
+            <AboutSection />
+            <WorkflowSection />
+            <TechStackSection />
+            <ProjectsSection />
+            <GitHubSection />
+            <ExperienceSection />
+            <ContactSection />
+          </div>
         </div>
-        <div className="relative z-10">
-          <Navbar sectionIds={SECTION_IDS} />
-          <ScrollPath sectionIds={SECTION_IDS} />
-          <LandingSection />
-          <AboutSection />
-          <WorkflowSection />
-          <TechStackSection />
-          <ProjectsSection />
-          <GitHubSection />
-          <ExperienceSection />
-          <ContactSection />
-        </div>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   )
 }
 
