@@ -96,7 +96,7 @@ export function Navbar({ sectionIds }: NavbarProps) {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
         <div className="flex items-center justify-between py-3 md:justify-center md:gap-10">
           <a
             href="#landing"
@@ -125,7 +125,7 @@ export function Navbar({ sectionIds }: NavbarProps) {
             ))}
           </div>
 
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-2 pr-1 sm:pr-2">
             <ThemeToggle />
             <button
               onClick={() => setMenuOpen(!menuOpen)}
