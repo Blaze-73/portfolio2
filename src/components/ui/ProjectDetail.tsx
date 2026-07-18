@@ -21,14 +21,13 @@ const backdrop = {
 }
 
 const panel = {
-  hidden: { opacity: 0, scale: 0.92, y: 40 },
+  hidden: { opacity: 0, y: 60 },
   visible: {
     opacity: 1,
-    scale: 1,
     y: 0,
     transition: { type: 'spring' as const, stiffness: 300, damping: 30, mass: 0.8 },
   },
-  exit: { opacity: 0, scale: 0.95, y: 20, transition: { duration: 0.2 } },
+  exit: { opacity: 0, y: 30, transition: { duration: 0.2 } },
 }
 
 export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
@@ -54,29 +53,29 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
     <AnimatePresence>
       {project && (
         <motion.div
-          className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 z-[999] flex items-end sm:items-center justify-center"
           variants={backdrop}
           initial="hidden"
           animate="visible"
           exit="hidden"
-          transition={{ duration: 0.25 }}
+          transition={{ duration: 0.2 }}
         >
           <motion.div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/60"
             onClick={onClose}
           />
 
           <motion.div
-            className="relative z-10 flex w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg)] shadow-2xl"
+            className="relative z-10 flex w-full max-w-3xl flex-col overflow-hidden rounded-t-2xl sm:rounded-2xl border border-[var(--border)] bg-[var(--bg)] shadow-2xl max-h-[92vh] sm:max-h-[85vh]"
             variants={panel}
             initial="hidden"
             animate="visible"
             exit="exit"
+            style={{ willChange: 'transform' }}
           >
-            {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white/70 backdrop-blur-sm transition-colors hover:bg-black/60 hover:text-white"
+              className="absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white/80 transition-colors hover:bg-black/70 hover:text-white"
               aria-label="Close"
             >
               <svg
@@ -95,34 +94,32 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
               </svg>
             </button>
 
-            {/* Image */}
-            <div className="relative h-[280px] w-full shrink-0 sm:h-[380px]">
-              {project.image ? (
+            {project.image ? (
+              <div className="relative w-full shrink-0 aspect-[4/3] sm:aspect-[16/9] max-h-[220px] sm:max-h-[380px]">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="h-full w-full object-contain bg-[var(--code-bg)] p-2"
+                  className="absolute inset-0 h-full w-full object-contain bg-[var(--code-bg)] p-2"
                 />
-              ) : (
-                <div className="flex h-full items-center justify-center bg-gradient-to-br from-[var(--accent-bg)] to-transparent">
-                  <span className="text-6xl font-bold text-[var(--accent)]/20 select-none">
-                    {project.title.charAt(0)}
-                  </span>
-                </div>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="flex h-[180px] sm:h-[280px] shrink-0 items-center justify-center bg-gradient-to-br from-[var(--accent-bg)] to-transparent">
+                <span className="text-5xl sm:text-6xl font-bold text-[var(--accent)]/20 select-none">
+                  {project.title.charAt(0)}
+                </span>
+              </div>
+            )}
 
-            {/* Content */}
-            <div className="flex flex-col p-6 sm:p-8">
-              <h2 className="text-2xl font-bold text-[var(--text-h)] sm:text-3xl">
+            <div className="flex flex-col overflow-y-auto p-5 sm:p-8">
+              <h2 className="text-xl sm:text-3xl font-bold text-[var(--text-h)]">
                 {project.title}
               </h2>
 
-              <p className="mt-4 leading-relaxed text-[var(--text)]">
+              <p className="mt-3 sm:mt-4 leading-relaxed text-[var(--text)] text-sm sm:text-base">
                 {project.description}
               </p>
 
-              <div className="mt-5 flex flex-wrap gap-2">
+              <div className="mt-4 sm:mt-5 flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
@@ -133,13 +130,13 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                 ))}
               </div>
 
-              <div className="mt-6 flex items-center gap-4">
+              <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                 {project.demo && (
                   <a
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[var(--accent)]/30"
+                    className="inline-flex items-center justify-center rounded-xl bg-[var(--accent)] px-5 py-3 sm:py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.02] sm:hover:scale-105 hover:shadow-lg hover:shadow-[var(--accent)]/30"
                   >
                     Live Demo
                   </a>
@@ -149,7 +146,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/btn text-sm font-medium text-[var(--text)] transition-colors hover:text-[var(--text-h)]"
+                    className="group/btn inline-flex items-center justify-center rounded-xl border border-[var(--border)] px-5 py-3 sm:py-2.5 text-sm font-medium text-[var(--text)] transition-colors hover:text-[var(--text-h)] hover:bg-[var(--code-bg)]"
                   >
                     <span className="inline-flex items-center gap-1">
                       GitHub

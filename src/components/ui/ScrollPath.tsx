@@ -1,51 +1,73 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
-import { useSpring, useMotionValue } from 'framer-motion'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
-import { useScrollProgress } from '../../hooks/useScrollProgress'
 
 interface ScrollPathProps {
   sectionIds: string[]
 }
 
+const LINE_X = 12
+
+function getProgress(): number {
+  const scrollTop = window.scrollY
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight
+  return docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0
+}
+
 export function ScrollPath({ sectionIds }: ScrollPathProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const pathRef = useRef<SVGPathElement>(null)
+  const dotRef = useRef<SVGCircleElement>(null)
+  const glowRef = useRef<SVGCircleElement>(null)
+  const dotInnerRef = useRef<SVGCircleElement>(null)
+  const gradientRef = useRef<SVGLinearGradientElement>(null)
   const [svgSize, setSvgSize] = useState({ width: 24, height: 0 })
-  const progress = useScrollProgress()
-  const reducedMotion = useReducedMotion()
-  const progressVal = useMotionValue(progress)
-  useEffect(() => { progressVal.set(progress) }, [progress, progressVal])
-  const smoothProgress = useSpring(progressVal, { stiffness: 100, damping: 24 })
-  const [dotPos, setDotPos] = useState({ x: 0, y: 0 })
   const [waypoints, setWaypoints] = useState<{ x: number; y: number }[]>([])
-  const lineX = 12
-  const scrollTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const reducedMotion = useReducedMotion()
+  const smoothPct = useRef(getProgress())
+  const rafId = useRef<number>(0)
 
-  // Opacity driven by scroll activity
-  const idleOpacityVal = useMotionValue(0.12)
-  const scrollOpacity = useSpring(idleOpacityVal, { stiffness: 80, damping: 16 })
-  const [opac, setOpac] = useState(0.12)
+  const updateDot = useCallback(() => {
+    const path = pathRef.current
+    const dot = dotRef.current
+    const glow = glowRef.current
+    const dotInner = dotInnerRef.current
+    const grad = gradientRef.current
+    if (!path || !dot || !glow || !dotInner || !grad) return
+
+    const length = path.getTotalLength()
+    if (length === 0) return
+
+    const clamped = Math.max(0, Math.min(1, smoothPct.current))
+    const point = path.getPointAtLength(clamped * length)
+
+    dot.setAttribute('cy', String(point.y))
+    glow.setAttribute('cy', String(point.y))
+    dotInner.setAttribute('cy', String(point.y))
+
+    const opacity = 0.12 + clamped * 0.6
+    dot.setAttribute('opacity', String(0.7 * opacity))
+    glow.setAttribute('opacity', String(0.08 * Math.min(1, opacity * 2)))
+
+    grad.setAttribute('y1', String(clamped * svgSize.height))
+  }, [svgSize.height])
 
   useEffect(() => {
+    if (reducedMotion) return
+
     const onScroll = () => {
-      idleOpacityVal.set(1)
-      clearTimeout(scrollTimer.current)
-      scrollTimer.current = setTimeout(() => {
-        idleOpacityVal.set(0.12)
-      }, 600)
+      cancelAnimationFrame(rafId.current)
+      rafId.current = requestAnimationFrame(() => {
+        smoothPct.current += (getProgress() - smoothPct.current) * 0.15
+        updateDot()
+      })
     }
+
     window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
     return () => {
       window.removeEventListener('scroll', onScroll)
-      clearTimeout(scrollTimer.current)
+      cancelAnimationFrame(rafId.current)
     }
-  }, [idleOpacityVal])
-
-  useEffect(() => {
-    const unsub = scrollOpacity.on('change', setOpac)
-    return unsub
-  }, [scrollOpacity])
+  }, [reducedMotion, updateDot])
 
   useEffect(() => {
     const container = containerRef.current
@@ -73,10 +95,13 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
         const el = document.getElementById(id)
         const raw = el ? el.offsetTop : 0
         const y = margin + ((raw / scrollHeight) * (svgSize.height - margin * 2))
-        return { x: lineX, y }
+        return { x: LINE_X, y }
       })
     }
-    const update = () => setWaypoints(calculate())
+    const update = () => {
+      setWaypoints(calculate())
+      smoothPct.current = getProgress()
+    }
     update()
     const observers: ResizeObserver[] = []
     for (const id of sectionIds) {
@@ -98,27 +123,7 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
     return `M ${waypoints[0].x} ${waypoints[0].y} L ${waypoints[waypoints.length - 1].x} ${waypoints[waypoints.length - 1].y}`
   }, [waypoints])
 
-  const updateDot = useCallback(() => {
-    if (!pathRef.current) return
-    const length = pathRef.current.getTotalLength()
-    if (length === 0) return
-    const clamped = Math.max(0, Math.min(1, smoothProgress.get()))
-    const point = pathRef.current.getPointAtLength(clamped * length)
-    setDotPos({ x: point.x, y: point.y })
-  }, [smoothProgress])
-
-  useEffect(() => {
-    const unsub = smoothProgress.on('change', updateDot)
-    return unsub
-  }, [smoothProgress, updateDot])
-
-  useEffect(() => {
-    updateDot()
-  }, [pathD, updateDot])
-
   if (reducedMotion) return null
-
-  const o = opac
 
   return (
     <div
@@ -141,23 +146,20 @@ export function ScrollPath({ sectionIds }: ScrollPathProps) {
             </feMerge>
           </filter>
           <linearGradient id="pathGrad" x1="0" y1="0" x2="0" y2={svgSize.height}>
-            <stop offset={Math.max(0, smoothProgress.get() - 0.02)} stopColor="var(--border)" stopOpacity={0.35 * o} />
-            <stop offset={Math.max(0, smoothProgress.get() - 0.01)} stopColor="var(--accent)" stopOpacity={0.25 * o} />
-            <stop offset={smoothProgress.get()} stopColor="var(--accent)" stopOpacity={0.65 * o} />
-            <stop offset={Math.min(1, smoothProgress.get() + 0.08)} stopColor="var(--accent)" stopOpacity={0.2 * o} />
-            <stop offset={Math.min(1, smoothProgress.get() + 0.25)} stopColor="var(--border)" stopOpacity={0.25 * o} />
+            <stop offset="0" stopColor="var(--border)" stopOpacity="0.1" />
+            <stop offset="1" stopColor="var(--accent)" stopOpacity="0.4" />
           </linearGradient>
         </defs>
 
         <path ref={pathRef} d={pathD} fill="none" stroke="url(#pathGrad)" strokeWidth="2" strokeLinecap="round" />
 
         {waypoints.map((wp, i) => (
-          <circle key={i} cx={wp.x} cy={wp.y} r="3" fill="var(--border)" opacity={0.5 * o} />
+          <circle key={i} cx={wp.x} cy={wp.y} r="3" fill="var(--border)" opacity="0.35" />
         ))}
 
-        <circle cx={dotPos.x} cy={dotPos.y} r="32" fill="var(--accent)" opacity={0.08 * Math.min(1, o * 2)} filter="url(#pathGlow)" />
-        <circle cx={dotPos.x} cy={dotPos.y} r="10" fill="var(--accent)" opacity={0.7 * o} />
-        <circle cx={dotPos.x} cy={dotPos.y} r="4" fill="#fff" opacity={0.9 * o} />
+        <circle ref={glowRef} cx={LINE_X} cy={0} r="32" fill="var(--accent)" opacity="0" filter="url(#pathGlow)" />
+        <circle ref={dotRef} cx={LINE_X} cy={0} r="10" fill="var(--accent)" opacity="0" />
+        <circle ref={dotInnerRef} cx={LINE_X} cy={0} r="4" fill="#fff" opacity="0" />
       </svg>
     </div>
   )

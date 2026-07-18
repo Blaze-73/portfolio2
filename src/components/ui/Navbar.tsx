@@ -88,9 +88,9 @@ export function Navbar({ sectionIds }: NavbarProps) {
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-[60] transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-[60] transition-all duration-300 will-change-transform',
         scrolled || menuOpen
-          ? 'bg-[var(--bg)]/85 backdrop-blur-xl border-b border-[var(--border)] shadow-sm'
+          ? 'bg-[var(--bg)]/85 backdrop-blur-md md:backdrop-blur-xl border-b border-[var(--border)] shadow-sm'
           : 'bg-[var(--bg)]/50 backdrop-blur-sm'
       )}
       role="navigation"

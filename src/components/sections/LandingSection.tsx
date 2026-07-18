@@ -29,6 +29,7 @@ export function LandingSection() {
           initial="hidden"
           animate="visible"
           className="flex flex-col items-center text-center"
+          style={{ willChange: 'transform' }}
         >
           <motion.div
             variants={fadeUp}
