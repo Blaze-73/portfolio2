@@ -97,7 +97,7 @@ export function Navbar({ sectionIds }: NavbarProps) {
       aria-label="Main navigation"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-6">
-        <div className="flex items-center justify-between py-3 md:justify-center md:gap-10">
+        <div className="flex items-center py-3">
           <a
             href="#landing"
             onClick={(e) => { e.preventDefault(); handleClick('landing') }}
@@ -106,26 +106,28 @@ export function Navbar({ sectionIds }: NavbarProps) {
             MBK
           </a>
 
-          <div className="hidden md:flex items-center gap-1">
-            <ThemeToggle />
-            {sectionIds.map((id) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                onClick={(e) => { e.preventDefault(); handleClick(id) }}
-                className={cn(
-                  'rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-200',
-                  active === id
-                    ? 'text-[var(--accent)] bg-[var(--accent-bg)]'
-                    : 'text-[var(--text)] hover:text-[var(--text-h)] hover:bg-[var(--code-bg)]'
-                )}
-              >
-                {labels[id] || id}
-              </a>
-            ))}
+          <div className="hidden md:flex flex-1 items-center justify-center gap-10">
+            <div className="flex items-center gap-1">
+              <ThemeToggle />
+              {sectionIds.map((id) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={(e) => { e.preventDefault(); handleClick(id) }}
+                  className={cn(
+                    'rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-200',
+                    active === id
+                      ? 'text-[var(--accent)] bg-[var(--accent-bg)]'
+                      : 'text-[var(--text)] hover:text-[var(--text-h)] hover:bg-[var(--code-bg)]'
+                  )}
+                >
+                  {labels[id] || id}
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div className="flex md:hidden items-center gap-2 pr-1 sm:pr-2">
+          <div className="flex md:hidden flex-1 items-center justify-end gap-3 mr-12 sm:mr-16">
             <ThemeToggle />
             <button
               onClick={() => setMenuOpen(!menuOpen)}

@@ -38,6 +38,7 @@ export function LandingSection() {
             <img
               src="/images/pfp.png"
               alt="Mouataz Billah Kachkach"
+              loading="lazy"
               className="h-36 w-36 flex-shrink-0 object-cover aspect-square ring-4 ring-[var(--accent)]/20 md:h-48 md:w-48 lg:h-56 lg:w-56"
             />
             <div className="text-left">
