@@ -24,13 +24,23 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
   )
 
   useEffect(() => {
-    if (project) {
-      document.addEventListener('keydown', handleKey)
-      document.body.style.overflow = 'hidden'
-    }
+    if (!project) return
+
+    document.addEventListener('keydown', handleKey)
+
+    const body = document.body
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+
+    const origOverflow = body.style.overflow
+    const origPadding = body.style.paddingRight
+
+    body.style.overflow = 'hidden'
+    body.style.paddingRight = `${scrollbarWidth}px`
+
     return () => {
       document.removeEventListener('keydown', handleKey)
-      document.body.style.overflow = ''
+      body.style.overflow = origOverflow
+      body.style.paddingRight = origPadding
     }
   }, [project, handleKey])
 
@@ -44,13 +54,12 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <div
-            className="absolute inset-0 bg-black/60"
-            onClick={onClose}
-          />
+          <div className="absolute inset-0 bg-black/60" onClick={onClose} />
 
-          <div className="absolute inset-0 flex items-end sm:items-center justify-center pointer-events-none">
-            <div className="pointer-events-auto relative flex w-full max-w-3xl flex-col overflow-hidden rounded-t-2xl sm:rounded-2xl border border-[var(--border)] bg-[var(--bg)] shadow-2xl max-h-[92vh] sm:max-h-[85vh]">
+          <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div
+              className="pointer-events-auto relative flex w-full max-w-3xl flex-col rounded-2xl border border-[var(--border)] bg-[var(--bg)] shadow-2xl max-h-[85vh] overflow-hidden"
+            >
               <button
                 onClick={onClose}
                 className="absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white/80 transition-colors hover:bg-black/70 hover:text-white"
@@ -73,7 +82,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
               </button>
 
               {project.image ? (
-                <div className="relative w-full shrink-0 h-[220px] sm:h-[380px]">
+                <div className="relative w-full shrink-0 h-[220px] sm:h-[380px] rounded-t-2xl overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -81,7 +90,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                   />
                 </div>
               ) : (
-                <div className="flex h-[180px] sm:h-[280px] shrink-0 items-center justify-center bg-gradient-to-br from-[var(--accent-bg)] to-transparent">
+                <div className="flex h-[180px] sm:h-[280px] shrink-0 items-center justify-center rounded-t-2xl bg-gradient-to-br from-[var(--accent-bg)] to-transparent">
                   <span className="text-5xl sm:text-6xl font-bold text-[var(--accent)]/20 select-none">
                     {project.title.charAt(0)}
                   </span>
