@@ -88,10 +88,10 @@ export function Navbar({ sectionIds }: NavbarProps) {
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-[60] transition-all duration-300 will-change-transform',
+        'fixed top-0 left-0 right-0 z-[60] transition-all duration-300 will-change-transform bg-[var(--bg)]',
         scrolled || menuOpen
-          ? 'bg-[var(--bg)]/85 backdrop-blur-md md:backdrop-blur-xl border-b border-[var(--border)] shadow-sm'
-          : 'bg-[var(--bg)]/50 backdrop-blur-sm'
+          ? 'backdrop-blur-md md:backdrop-blur-xl border-b border-[var(--border)] shadow-sm'
+          : 'md:bg-[var(--bg)]/80 md:backdrop-blur-sm border-b border-[var(--border)]/30 md:border-transparent'
       )}
       role="navigation"
       aria-label="Main navigation"
@@ -172,8 +172,7 @@ export function Navbar({ sectionIds }: NavbarProps) {
             exit="closed"
             className={cn(
               'fixed inset-x-0 top-[57px] bottom-0 z-50',
-              'bg-[var(--bg)]/98 backdrop-blur-2xl',
-              'border-t border-[var(--border)]/50'
+              'bg-[var(--bg)] backdrop-blur-xl border-t border-[var(--border)]'
             )}
           >
             <nav className="mx-auto max-w-7xl px-6 py-8" aria-label="Mobile navigation">
@@ -189,10 +188,10 @@ export function Navbar({ sectionIds }: NavbarProps) {
                     animate="open"
                     exit="closed"
                     className={cn(
-                      'flex items-center rounded-xl px-5 py-3.5 text-base font-medium transition-all duration-200',
+                      'flex items-center rounded-xl px-5 py-3.5 text-base font-medium transition-all duration-200 bg-[var(--code-bg)]',
                       active === id
                         ? 'text-[var(--accent)] bg-[var(--accent-bg)]'
-                        : 'text-[var(--text)] hover:text-[var(--text-h)] hover:bg-[var(--code-bg)]'
+                        : 'text-[var(--text)] hover:text-[var(--text-h)]'
                     )}
                   >
                     <span className="mr-4 text-xs font-mono text-[var(--text)]/50 tabular-nums">
