@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '../../lib/utils'
 import { ThemeToggle } from './ThemeToggle'
+import { GithubIcon } from './Icons'
 
 interface NavbarProps {
   sectionIds: string[]
@@ -109,6 +110,15 @@ export function Navbar({ sectionIds }: NavbarProps) {
           <div className="hidden md:flex flex-1 items-center justify-center gap-10">
             <div className="flex items-center gap-1">
               <ThemeToggle />
+              <a
+                href="https://github.com/Blaze-73"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-7 w-7 items-center justify-center rounded-lg text-[var(--text)] transition-all duration-200 hover:text-[var(--accent)] hover:bg-[var(--code-bg)]"
+                aria-label="GitHub profile"
+              >
+                <GithubIcon />
+              </a>
               {sectionIds.map((id) => (
                 <a
                   key={id}
@@ -176,6 +186,17 @@ export function Navbar({ sectionIds }: NavbarProps) {
             )}
           >
             <nav className="mx-auto max-w-7xl px-6 py-8" aria-label="Mobile navigation">
+              <div className="mb-6 flex items-center gap-3 px-5">
+                <a
+                  href="https://github.com/Blaze-73"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--code-bg)] text-[var(--text)] transition-all duration-200 hover:text-[var(--accent)]"
+                  aria-label="GitHub profile"
+                >
+                  <GithubIcon />
+                </a>
+              </div>
               <div className="space-y-1">
                 {sectionIds.map((id, i) => (
                   <motion.a
