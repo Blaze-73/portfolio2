@@ -133,21 +133,19 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                       Live Demo
                     </a>
                   )}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/btn inline-flex items-center justify-center rounded-xl border border-[var(--border)] px-5 py-3 sm:py-2.5 text-sm font-medium text-[var(--text)] transition-colors hover:text-[var(--text-h)] hover:bg-[var(--code-bg)]"
-                    >
-                      <span className="inline-flex items-center gap-1">
-                        GitHub
-                        <span className="inline-block transition-transform group-hover/btn:translate-x-1">
-                          →
-                        </span>
+                  <a
+                    href="https://github.com/Blaze-73?tab=repositories"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/btn inline-flex items-center justify-center rounded-xl border border-[var(--border)] px-5 py-3 sm:py-2.5 text-sm font-medium text-[var(--text)] transition-colors hover:text-[var(--text-h)] hover:bg-[var(--code-bg)]"
+                  >
+                    <span className="inline-flex items-center gap-1">
+                      GitHub
+                      <span className="inline-block transition-transform group-hover/btn:translate-x-1">
+                        →
                       </span>
-                    </a>
-                  )}
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
