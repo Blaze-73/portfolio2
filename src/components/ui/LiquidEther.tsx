@@ -211,16 +211,8 @@ export default function LiquidEther({
         this.container = null
       }
 
-      isPointInside(clientX: number, clientY: number) {
-        if (!this.container) return false
-        const rect = this.container.getBoundingClientRect()
-        if (rect.width === 0 || rect.height === 0) return false
-        return (
-          clientX >= rect.left &&
-          clientX <= rect.right &&
-          clientY >= rect.top &&
-          clientY <= rect.bottom
-        )
+      isPointInside(_clientX: number, _clientY: number) {
+        return true
       }
 
       updateHoverState(clientX: number, clientY: number) {
@@ -231,10 +223,11 @@ export default function LiquidEther({
       setCoords(x: number, y: number) {
         if (!this.container) return
         if (this.timer) window.clearTimeout(this.timer)
-        const rect = this.container.getBoundingClientRect()
-        if (rect.width === 0 || rect.height === 0) return
-        const nx = (x - rect.left) / rect.width
-        const ny = (y - rect.top) / rect.height
+        const w = window.innerWidth
+        const h = window.innerHeight
+        if (w === 0 || h === 0) return
+        const nx = x / w
+        const ny = y / h
         this.coords.set(nx * 2 - 1, -(ny * 2 - 1))
         this.mouseMoved = true
         this.timer = window.setTimeout(() => {
@@ -256,10 +249,11 @@ export default function LiquidEther({
           !this.takeoverActive
         ) {
           if (!this.container) return
-          const rect = this.container.getBoundingClientRect()
-          if (rect.width === 0 || rect.height === 0) return
-          const nx = (event.clientX - rect.left) / rect.width
-          const ny = (event.clientY - rect.top) / rect.height
+          const w = window.innerWidth
+          const h = window.innerHeight
+          if (w === 0 || h === 0) return
+          const nx = event.clientX / w
+          const ny = event.clientY / h
           this.takeoverFrom.copy(this.coords)
           this.takeoverTo.set(nx * 2 - 1, -(ny * 2 - 1))
           this.takeoverStartTime = performance.now()
