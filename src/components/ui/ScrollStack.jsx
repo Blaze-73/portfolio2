@@ -1,6 +1,5 @@
-import { useLayoutEffect, useRef, useCallback, useEffect, useMemo, Children } from 'react'
+import { useEffect, useRef, useCallback, useMemo, Children } from 'react'
 import { motion, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion'
-import Lenis from 'lenis'
 import './ScrollStack.css'
 
 const SPRING = { stiffness: 280, damping: 35, mass: 0.4 }
@@ -57,7 +56,6 @@ const ScrollStack = ({
 }) => {
   const scrollerRef = useRef(null)
   const stackCompletedRef = useRef(false)
-  const lenisRef = useRef(null)
   const animationFrameRef = useRef(null)
   const cardApisRef = useRef(new Map())
 
@@ -159,45 +157,9 @@ const ScrollStack = ({
     getOffset,
   ])
 
-  const handleScroll = useCallback(() => {
-    updateTransforms()
-  }, [updateTransforms])
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     const scroller = scrollerRef.current
     if (!scroller) return
-
-    const lenisOpts = useWindowScroll
-      ? {
-          duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
-          smoothWheel: true,
-          touchMultiplier: 0.8,
-          infinite: false,
-          wheelMultiplier: 0.8,
-          lerp: 0.1,
-        }
-      : {
-          wrapper: scroller,
-          content: scroller.querySelector('.scroll-stack-inner'),
-          duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
-          smoothWheel: true,
-          touchMultiplier: 0.8,
-          infinite: false,
-          wheelMultiplier: 0.8,
-          lerp: 0.1,
-        }
-
-    const lenis = new Lenis(lenisOpts)
-    lenis.on('scroll', handleScroll)
-    lenisRef.current = lenis
-
-    const raf = (time) => {
-      lenis.raf(time)
-      animationFrameRef.current = requestAnimationFrame(raf)
-    }
-    animationFrameRef.current = requestAnimationFrame(raf)
 
     const cards = useWindowScroll
       ? document.querySelectorAll('.scroll-stack-card')
@@ -211,15 +173,23 @@ const ScrollStack = ({
 
     updateTransforms()
 
+    const onScroll = () => {
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current)
+      animationFrameRef.current = requestAnimationFrame(updateTransforms)
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
     const apis = cardApisRef.current
 
     return () => {
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current)
-      if (lenisRef.current) lenisRef.current.destroy()
+      window.removeEventListener('scroll', onScroll)
       stackCompletedRef.current = false
       apis.clear()
     }
-  }, [itemDistance, useWindowScroll, handleScroll, updateTransforms])
+  }, [itemDistance, useWindowScroll, updateTransforms])
 
   return (
     <div className={`scroll-stack-scroller ${className}`.trim()} ref={scrollerRef}>
