@@ -93,3 +93,8 @@ img {
   height: auto;
   display: block;
 }
+
+html[data-modal-open] #liquid-ether-bg {
+  opacity: 0 !important;
+  transition: opacity 0.2s ease;
+}

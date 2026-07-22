@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface Project {
@@ -28,23 +29,26 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
 
     document.addEventListener('keydown', handleKey)
 
+    const html = document.documentElement
     const body = document.body
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+    const scrollbarWidth = window.innerWidth - html.clientWidth
 
     const origOverflow = body.style.overflow
     const origPadding = body.style.paddingRight
 
     body.style.overflow = 'hidden'
     body.style.paddingRight = `${scrollbarWidth}px`
+    html.setAttribute('data-modal-open', '')
 
     return () => {
       document.removeEventListener('keydown', handleKey)
       body.style.overflow = origOverflow
       body.style.paddingRight = origPadding
+      html.removeAttribute('data-modal-open')
     }
   }, [project, handleKey])
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {project && (
         <motion.div
@@ -56,9 +60,9 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
         >
           <div className="absolute inset-0 bg-black/60" onClick={onClose} />
 
-          <div className="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+          <div className="absolute inset-0 flex items-center justify-center p-0 sm:p-4 pointer-events-none">
             <div
-              className="pointer-events-auto relative flex w-full max-w-3xl flex-col rounded-2xl border border-[var(--border)] bg-[var(--bg)] shadow-2xl max-h-[85vh] overflow-hidden"
+              className="pointer-events-auto relative flex w-full flex-col bg-[var(--bg)] overflow-hidden h-full sm:max-h-[85vh] sm:rounded-2xl sm:border sm:border-[var(--border)] sm:shadow-2xl sm:max-w-3xl"
             >
               <button
                 onClick={onClose}
@@ -82,15 +86,16 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
               </button>
 
               {project.image ? (
-                <div className="relative w-full shrink-0 h-[220px] sm:h-[380px] rounded-t-2xl overflow-hidden">
+                <div className="relative w-full shrink-0 h-[220px] sm:h-[380px] sm:rounded-t-2xl overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="absolute inset-0 h-full w-full object-contain bg-[var(--code-bg)] p-2"
+                    loading="lazy"
                   />
                 </div>
               ) : (
-                <div className="flex h-[180px] sm:h-[280px] shrink-0 items-center justify-center rounded-t-2xl bg-gradient-to-br from-[var(--accent-bg)] to-transparent">
+                <div className="flex h-[180px] sm:h-[280px] shrink-0 items-center justify-center sm:rounded-t-2xl bg-gradient-to-br from-[var(--accent-bg)] to-transparent">
                   <span className="text-5xl sm:text-6xl font-bold text-[var(--accent)]/20 select-none">
                     {project.title.charAt(0)}
                   </span>
@@ -149,6 +154,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   )
 }

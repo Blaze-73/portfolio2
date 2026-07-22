@@ -444,6 +444,7 @@ export function MagicBento({
                   alt=""
                   className="mb-card-bg"
                   aria-hidden="true"
+                  loading="lazy"
                 />
               )}
               <div className="mb-card-overlay" />

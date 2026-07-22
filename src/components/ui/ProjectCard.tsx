@@ -52,6 +52,7 @@ export function ProjectCard({
               src={image}
               alt={title}
               className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+              loading="lazy"
             />
             <div className="absolute inset-0 z-20 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               {demo && (

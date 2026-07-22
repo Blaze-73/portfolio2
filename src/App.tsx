@@ -46,7 +46,7 @@ function App() {
         <SEOHead />
         <div className="relative">
           <Suspense fallback={null}>
-            <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+            <div id="liquid-ether-bg" className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
               <LiquidEther
                 colors={['#aa3bff', '#7c3aed', '#5227FF']}
                 autoDemo={!reducedMotion}
