@@ -172,12 +172,10 @@ const ScrollStack = ({
           duration: 1.2,
           easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
           smoothWheel: true,
-          touchMultiplier: 2,
+          touchMultiplier: 0.8,
           infinite: false,
-          wheelMultiplier: 1,
+          wheelMultiplier: 0.8,
           lerp: 0.1,
-          syncTouch: true,
-          syncTouchLerp: 0.075,
         }
       : {
           wrapper: scroller,
@@ -185,12 +183,10 @@ const ScrollStack = ({
           duration: 1.2,
           easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
           smoothWheel: true,
-          touchMultiplier: 2,
+          touchMultiplier: 0.8,
           infinite: false,
-          wheelMultiplier: 1,
+          wheelMultiplier: 0.8,
           lerp: 0.1,
-          syncTouch: true,
-          syncTouchLerp: 0.075,
         }
 
     const lenis = new Lenis(lenisOpts)
