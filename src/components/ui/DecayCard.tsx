@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { gsap } from 'gsap'
 import './DecayCard.css'
 
@@ -14,6 +14,26 @@ interface DecayCardProps {
   movementBound?: number
 }
 
+function useReducedMotion(): boolean {
+  const mq = useRef<MediaQueryList | null>(null)
+  if (typeof window !== 'undefined' && !mq.current) {
+    mq.current = window.matchMedia('(prefers-reduced-motion: reduce)')
+  }
+  return mq.current?.matches ?? false
+}
+
+function useMobile(): boolean {
+  const [mobile, setMobile] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth <= 768,
+  )
+  useEffect(() => {
+    const check = () => setMobile(window.innerWidth <= 768)
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+  return mobile
+}
+
 export function DecayCard({
   children,
   className = '',
@@ -27,12 +47,23 @@ export function DecayCard({
 }: DecayCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const displacementRef = useRef<SVGFEDisplacementMapElement>(null)
-  const cursor = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
-  const cachedCursor = useRef({ ...cursor.current })
-  const winsize = useRef({ width: window.innerWidth, height: window.innerHeight })
   const filterId = `decay-${Math.random().toString(36).slice(2, 9)}`
+  const reducedMotion = useReducedMotion()
+  const mobile = useMobile()
 
   useEffect(() => {
+    if (reducedMotion || mobile) return
+
+    const el = cardRef.current
+    if (!el) return
+
+    const cursor = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+    const cachedCursor = { ...cursor }
+    const winsize = { width: window.innerWidth, height: window.innerHeight }
+    let active = false
+    let rafId = 0
+    let idleTimer: ReturnType<typeof setTimeout> | null = null
+
     const lerp = (a: number, b: number, n: number) => (1 - n) * a + n * b
 
     const map = (x: number, a: number, b: number, c: number, d: number) =>
@@ -42,37 +73,41 @@ export function DecayCard({
       Math.hypot(x1 - x2, y1 - y2)
 
     const handleResize = () => {
-      winsize.current = { width: window.innerWidth, height: window.innerHeight }
+      winsize.width = window.innerWidth
+      winsize.height = window.innerHeight
     }
 
     const handleMouseMove = (ev: MouseEvent) => {
-      cursor.current = { x: ev.clientX, y: ev.clientY }
+      cursor.x = ev.clientX
+      cursor.y = ev.clientY
+      if (!active) {
+        active = true
+        rafId = requestAnimationFrame(render)
+      }
+      if (idleTimer) clearTimeout(idleTimer)
+      idleTimer = setTimeout(() => {
+        active = false
+      }, 100)
     }
 
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('mousemove', handleMouseMove)
-
-    const state = {
-      x: 0,
-      y: 0,
-      rz: 0,
-      displacementScale: 0,
-    }
+    const state = { x: 0, y: 0, rz: 0, displacementScale: 0 }
 
     const render = () => {
+      if (!active) return
+
       let targetX = lerp(
         state.x,
-        map(cursor.current.x, 0, winsize.current.width, -120, 120),
+        map(cursor.x, 0, winsize.width, -120, 120),
         0.1,
       )
       let targetY = lerp(
         state.y,
-        map(cursor.current.y, 0, winsize.current.height, -120, 120),
+        map(cursor.y, 0, winsize.height, -120, 120),
         0.1,
       )
       let targetRz = lerp(
         state.rz,
-        map(cursor.current.x, 0, winsize.current.width, -10, 10),
+        map(cursor.x, 0, winsize.width, -10, 10),
         0.1,
       )
 
@@ -89,20 +124,9 @@ export function DecayCard({
       state.y = targetY
       state.rz = targetRz
 
-      if (cardRef.current) {
-        gsap.set(cardRef.current, {
-          x: state.x,
-          y: state.y,
-          rotateZ: state.rz,
-        })
-      }
+      gsap.set(el, { x: state.x, y: state.y, rotateZ: state.rz })
 
-      const dist = distance(
-        cachedCursor.current.x,
-        cursor.current.x,
-        cachedCursor.current.y,
-        cursor.current.y,
-      )
+      const dist = distance(cachedCursor.x, cursor.x, cachedCursor.y, cursor.y)
       state.displacementScale = lerp(
         state.displacementScale,
         map(dist, 0, 200, 0, maxDisplacement),
@@ -110,24 +134,25 @@ export function DecayCard({
       )
 
       if (displacementRef.current) {
-        gsap.set(displacementRef.current, {
-          attr: { scale: state.displacementScale },
-        })
+        gsap.set(displacementRef.current, { attr: { scale: state.displacementScale } })
       }
 
-      cachedCursor.current = { ...cursor.current }
+      cachedCursor.x = cursor.x
+      cachedCursor.y = cursor.y
 
       rafId = requestAnimationFrame(render)
     }
 
-    let rafId = requestAnimationFrame(render)
+    window.addEventListener('resize', handleResize)
+    window.addEventListener('mousemove', handleMouseMove)
 
     return () => {
-      cancelAnimationFrame(rafId)
+      if (rafId) cancelAnimationFrame(rafId)
+      if (idleTimer) clearTimeout(idleTimer)
       window.removeEventListener('resize', handleResize)
       window.removeEventListener('mousemove', handleMouseMove)
     }
-  }, [maxDisplacement, movementBound])
+  }, [reducedMotion, mobile, maxDisplacement, movementBound])
 
   return (
     <div className={`decay-card ${className}`.trim()} ref={cardRef}>

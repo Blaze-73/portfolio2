@@ -293,64 +293,70 @@ function GlobalSpotlight({
     const proximity = spotlightRadius * 0.5
     const fadeDistance = spotlightRadius * 0.75
 
+    let moveRaf: number | null = null
+
     const onMove = (e: MouseEvent) => {
-      if (!spotlightRef.current || !gridRef.current) return
-      const section = gridRef.current.closest('.mb-bento-section') as HTMLElement | null
-      const rect = section?.getBoundingClientRect()
-      const mouseInside =
-        rect &&
-        e.clientX >= rect.left &&
-        e.clientX <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY <= rect.bottom
+      if (moveRaf) cancelAnimationFrame(moveRaf)
+      moveRaf = requestAnimationFrame(() => {
+        moveRaf = null
+        if (!spotlightRef.current || !gridRef.current) return
+        const section = gridRef.current.closest('.mb-bento-section') as HTMLElement | null
+        const rect = section?.getBoundingClientRect()
+        const mouseInside =
+          rect &&
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom
 
-      inside.current = mouseInside || false
-      const cards = gridRef.current.querySelectorAll<HTMLElement>('.mb-particle-container')
+        inside.current = mouseInside || false
+        const cards = gridRef.current.querySelectorAll<HTMLElement>('.mb-particle-container')
 
-      if (!mouseInside) {
-        gsap.to(spotlightRef.current, { opacity: 0, duration: 0.3, ease: 'power2.out' })
-        cards.forEach((c) => c.style.setProperty('--glow-intensity', '0'))
-        return
-      }
+        if (!mouseInside) {
+          gsap.to(spotlightRef.current, { opacity: 0, duration: 0.3, ease: 'power2.out' })
+          cards.forEach((c) => c.style.setProperty('--glow-intensity', '0'))
+          return
+        }
 
-      let minDist = Infinity
-      cards.forEach((card) => {
-        const cr = card.getBoundingClientRect()
-        const cx = cr.left + cr.width / 2
-        const cy = cr.top + cr.height / 2
-        const dist = Math.max(
-          0,
-          Math.hypot(e.clientX - cx, e.clientY - cy) -
-            Math.max(cr.width, cr.height) / 2,
-        )
-        minDist = Math.min(minDist, dist)
+        let minDist = Infinity
+        cards.forEach((card) => {
+          const cr = card.getBoundingClientRect()
+          const cx = cr.left + cr.width / 2
+          const cy = cr.top + cr.height / 2
+          const dist = Math.max(
+            0,
+            Math.hypot(e.clientX - cx, e.clientY - cy) -
+              Math.max(cr.width, cr.height) / 2,
+          )
+          minDist = Math.min(minDist, dist)
 
-        let intensity = 0
-        if (dist <= proximity) intensity = 1
-        else if (dist <= fadeDistance)
-          intensity = (fadeDistance - dist) / (fadeDistance - proximity)
+          let intensity = 0
+          if (dist <= proximity) intensity = 1
+          else if (dist <= fadeDistance)
+            intensity = (fadeDistance - dist) / (fadeDistance - proximity)
 
-        updateGlow(card, e.clientX, e.clientY, intensity, spotlightRadius)
-      })
+          updateGlow(card, e.clientX, e.clientY, intensity, spotlightRadius)
+        })
 
-      gsap.to(spotlightRef.current, {
-        left: e.clientX,
-        top: e.clientY,
-        duration: 0.1,
-        ease: 'power2.out',
-      })
+        gsap.to(spotlightRef.current, {
+          left: e.clientX,
+          top: e.clientY,
+          duration: 0.1,
+          ease: 'power2.out',
+        })
 
-      const opacity =
-        minDist <= proximity
-          ? 0.8
-          : minDist <= fadeDistance
-            ? ((fadeDistance - minDist) / (fadeDistance - proximity)) * 0.8
-            : 0
+        const opacity =
+          minDist <= proximity
+            ? 0.8
+            : minDist <= fadeDistance
+              ? ((fadeDistance - minDist) / (fadeDistance - proximity)) * 0.8
+              : 0
 
-      gsap.to(spotlightRef.current, {
-        opacity,
-        duration: opacity > 0 ? 0.2 : 0.5,
-        ease: 'power2.out',
+        gsap.to(spotlightRef.current, {
+          opacity,
+          duration: opacity > 0 ? 0.2 : 0.5,
+          ease: 'power2.out',
+        })
       })
     }
 
@@ -367,6 +373,7 @@ function GlobalSpotlight({
     document.addEventListener('mouseleave', onLeave)
 
     return () => {
+      if (moveRaf) cancelAnimationFrame(moveRaf)
       document.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseleave', onLeave)
       spotlightRef.current?.parentNode?.removeChild(spotlightRef.current)
