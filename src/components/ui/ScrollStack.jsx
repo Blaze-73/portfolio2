@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useMemo, Children } from 'react'
+import { useEffect, useLayoutEffect, useRef, useCallback, useMemo, Children } from 'react'
 import { motion, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion'
 import './ScrollStack.css'
 
@@ -32,7 +32,6 @@ function StackCard({ index, register, children }) {
       style={{
         transform,
         transformOrigin: 'top center',
-        willChange: 'transform',
         backfaceVisibility: 'hidden',
       }}
     >
@@ -157,7 +156,9 @@ const ScrollStack = ({
     getOffset,
   ])
 
-  useEffect(() => {
+  const initDone = useRef(false)
+
+  useLayoutEffect(() => {
     const scroller = scrollerRef.current
     if (!scroller) return
 
@@ -171,14 +172,38 @@ const ScrollStack = ({
       }
     })
 
-    updateTransforms()
+    const raf = requestAnimationFrame(() => {
+      if (!initDone.current) {
+        updateTransforms()
+        initDone.current = true
+      }
+    })
+
+    return () => {
+      cancelAnimationFrame(raf)
+      initDone.current = false
+    }
+  }, [itemDistance, useWindowScroll, updateTransforms])
+
+  useEffect(() => {
+    const scroller = scrollerRef.current
+    if (!scroller) return
 
     const onScroll = () => {
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current)
       animationFrameRef.current = requestAnimationFrame(updateTransforms)
     }
 
+    const onPointer = () => {
+      if (!initDone.current) {
+        updateTransforms()
+        initDone.current = true
+      }
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('pointerdown', onPointer, { passive: true })
+    window.addEventListener('touchstart', onPointer, { passive: true })
     onScroll()
 
     const apis = cardApisRef.current
@@ -186,10 +211,12 @@ const ScrollStack = ({
     return () => {
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current)
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('pointerdown', onPointer)
+      window.removeEventListener('touchstart', onPointer)
       stackCompletedRef.current = false
       apis.clear()
     }
-  }, [itemDistance, useWindowScroll, updateTransforms])
+  }, [updateTransforms])
 
   return (
     <div className={`scroll-stack-scroller ${className}`.trim()} ref={scrollerRef}>
