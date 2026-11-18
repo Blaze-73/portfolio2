@@ -10,6 +10,7 @@ import { WorkflowSection } from './components/sections/WorkflowSection'
 import { TechStackSection } from './components/sections/TechStackSection'
 import { ProjectsSection } from './components/sections/ProjectsSection'
 import { useReducedMotion } from './hooks/useReducedMotion'
+import { useMediaQuery } from './hooks/useMediaQuery'
 
 const LiquidEther = lazy(() => import('./components/ui/LiquidEther'))
 const GitHubSection = lazy(() =>
@@ -39,28 +40,32 @@ function SectionFallback() {
 
 function App() {
   const reducedMotion = useReducedMotion()
+  // The WebGL background is heavy: skip it on small screens and for reduced-motion users.
+  const showBackground = useMediaQuery('(min-width: 1024px)') && !reducedMotion
 
   return (
     <HelmetProvider>
       <ThemeProvider>
         <SEOHead />
         <div className="relative">
-          <Suspense fallback={null}>
-            <div id="liquid-ether-bg" className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
-              <LiquidEther
-                colors={['#aa3bff', '#7c3aed', '#5227FF']}
-                autoDemo={!reducedMotion}
-                resolution={0.35}
-                mouseForce={15}
-                cursorSize={80}
-                autoSpeed={0.3}
-                autoIntensity={1.5}
-                takeoverDuration={0.3}
-                autoResumeDelay={2000}
-                style={{ opacity: 0.15 }}
-              />
-            </div>
-          </Suspense>
+          {showBackground && (
+            <Suspense fallback={null}>
+              <div id="liquid-ether-bg" className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+                <LiquidEther
+                  colors={['#aa3bff', '#7c3aed', '#5227FF']}
+                  autoDemo
+                  resolution={0.35}
+                  mouseForce={15}
+                  cursorSize={80}
+                  autoSpeed={0.3}
+                  autoIntensity={1.5}
+                  takeoverDuration={0.3}
+                  autoResumeDelay={2000}
+                  style={{ opacity: 0.15 }}
+                />
+              </div>
+            </Suspense>
+          )}
           <div className="relative z-10">
             <Navbar sectionIds={SECTION_IDS} />
             <ScrollPath sectionIds={SECTION_IDS} />
