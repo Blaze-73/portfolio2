@@ -47,6 +47,20 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+
+    <!-- Theme -->
+    <script>
+      // Apply theme before first paint to avoid a flash of wrong colors
+      try {
+        var t = localStorage.getItem('theme')
+        if (t !== 'dark' && t !== 'light') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+        document.documentElement.setAttribute('data-theme', t)
+      } catch (e) {}
+    </script>
+    <meta name="theme-color" content="#16171d" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   </head>
   <body>
     <div id="root"></div>
