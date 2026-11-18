@@ -34,19 +34,19 @@ export function LandingSection() {
           <motion.div
             variants={fadeUp}
             transition={reducedMotion ? { duration: 0 } : springTransition}
-            className="flex items-center justify-center gap-5 md:gap-8 lg:gap-10"
+            className="flex flex-col items-center justify-center gap-6 text-center md:flex-row md:gap-8 md:text-left lg:gap-10"
           >
             <img
               src="/images/pfp.png"
               alt="Mouataz Billah Kachkach"
               fetchPriority="high"
-              className="h-36 w-36 flex-shrink-0 object-cover aspect-square ring-4 ring-[var(--accent)]/20 md:h-48 md:w-48 lg:h-56 lg:w-56"
+              className="h-32 w-32 flex-shrink-0 object-cover object-top aspect-square ring-4 ring-[var(--accent)]/20 md:h-48 md:w-48 lg:h-56 lg:w-56"
             />
-            <div className="text-left">
-              <span className="mb-2 block text-sm font-medium uppercase tracking-[0.25em] text-[var(--accent)]">
+            <div className="text-center md:text-left">
+              <span className="mb-2 block text-xs font-medium uppercase tracking-[0.25em] text-[var(--accent)] sm:text-sm">
                 Full Stack Web Developer
               </span>
-              <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--text-h)] md:text-5xl lg:text-6xl">
+              <h1 className="text-3xl font-bold leading-tight tracking-tight text-[var(--text-h)] sm:text-4xl md:text-5xl lg:text-6xl">
                 Mouataz Billah{' '}
                 <span className="text-[var(--accent)]">Kachkach</span>
               </h1>

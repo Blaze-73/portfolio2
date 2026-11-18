@@ -130,6 +130,7 @@ export function Navbar({ sectionIds }: NavbarProps) {
                       ? 'text-[var(--accent)] bg-[var(--accent-bg)]'
                       : 'text-[var(--text)] hover:text-[var(--text-h)] hover:bg-[var(--code-bg)]'
                   )}
+                  aria-current={active === id ? 'true' : undefined}
                 >
                   {labels[id] || id}
                 </a>
@@ -137,7 +138,7 @@ export function Navbar({ sectionIds }: NavbarProps) {
             </div>
           </div>
 
-          <div className="flex md:hidden flex-1 items-center justify-end gap-3 mr-12 sm:mr-16">
+          <div className="flex md:hidden flex-1 items-center justify-end gap-3">
             <ThemeToggle />
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -181,8 +182,8 @@ export function Navbar({ sectionIds }: NavbarProps) {
             animate="open"
             exit="closed"
             className={cn(
-              'fixed inset-x-0 top-[57px] bottom-0 z-50',
-              'bg-[var(--bg)] backdrop-blur-xl border-t border-[var(--border)]'
+              'absolute inset-x-0 top-full z-50 min-h-[calc(100dvh-57px)] max-h-[calc(100dvh-57px)] overflow-y-auto overscroll-contain',
+              'bg-[var(--bg)] border-t border-[var(--border)] shadow-lg'
             )}
           >
             <nav className="mx-auto max-w-7xl px-6 py-8" aria-label="Mobile navigation">
@@ -209,11 +210,12 @@ export function Navbar({ sectionIds }: NavbarProps) {
                     animate="open"
                     exit="closed"
                     className={cn(
-                      'flex items-center rounded-xl px-5 py-3.5 text-base font-medium transition-all duration-200 bg-[var(--code-bg)]',
+                      'flex items-center rounded-xl px-5 py-3.5 text-base font-medium transition-all duration-200',
                       active === id
                         ? 'text-[var(--accent)] bg-[var(--accent-bg)]'
-                        : 'text-[var(--text)] hover:text-[var(--text-h)]'
+                        : 'text-[var(--text)] bg-[var(--code-bg)] hover:text-[var(--text-h)]'
                     )}
+                    aria-current={active === id ? 'true' : undefined}
                   >
                     <span className="mr-4 text-xs font-mono text-[var(--text)]/50 tabular-nums">
                       {String(i + 1).padStart(2, '0')}
