@@ -14,7 +14,7 @@ const featuredProject = {
 Built with Laravel 12 REST API (25+ models) and React 18 frontend. Features real-time notifications, subscription auto-expiry alerts, site reviews, and a full admin dashboard with member/order/attendance analytics.`,  technologies: ['Laravel', 'React', 'MySQL', 'PayPal API', 'QR Code', 'Sanctum Auth'],
   github: 'https://github.com/Blaze-73/gym-management',
   demo: 'https://alien-gym-management.vercel.app/',
-  image: '/images/gympic.png',
+  image: '/images/gympic.webp',
 }
 
 const projects = [
@@ -25,7 +25,7 @@ const projects = [
 Built with the MERN stack (React 18 + Express + MongoDB Atlas) with JWT authentication for the admin panel. Supports three languages (French, English, Arabic RTL) via i18next, and uses GSAP for scroll animations. Admin can manage rooms, inquiries, testimonials, and gallery uploads.`,
     technologies: ['React', 'Express.js', 'MongoDB', 'JWT', 'Cloudinary', 'GSAP', 'i18next'],
     demo: 'https://riad-assilah-client.vercel.app',
-    image: '/images/riad.png',
+    image: '/images/riad.webp',
   },
   {
     title: 'Najiya Flowers',
@@ -35,7 +35,7 @@ Built with Next.js 16 App Router and TypeScript. Supports three languages (Frenc
     technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Zustand', 'Radix UI', 'next-intl'],
     github: 'https://github.com/Blaze-73/fleur-de-luxe',
     demo: 'https://najiya-flowers.vercel.app',
-    image: '/images/fleure.png',
+    image: '/images/fleure.webp',
   },
   {
     title: 'AHAYZONE',
@@ -45,7 +45,7 @@ Built with React 19 and Vite, featuring Lenis smooth scrolling, Framer Motion pa
     technologies: ['React', 'Vite', 'TailwindCSS', 'Framer Motion', 'Lenis', 'i18next'],
     github: 'https://github.com/Blaze-73/ahayzone',
     demo: 'https://ahayzone.vercel.app',
-    image: '/images/ahayzone.png',
+    image: '/images/ahayzone.webp',
   },
   {
     title: 'Parapharmacy',
@@ -55,7 +55,7 @@ Includes an admin dashboard with product CRUD, order status management, and cust
     technologies: ['React', 'Laravel', 'MySQL', 'TanStack Query', 'Zustand', 'Sanctum Auth'],
     github: 'https://github.com/Blaze-73/pharmacy-platform',
     demo: 'https://parapharmacyy.vercel.app',
-    image: '/images/para.png',
+    image: '/images/para.webp',
   },
   {
     title: 'Centre Hassan II',
@@ -65,7 +65,7 @@ Built with a Laravel 13 REST API (Sanctum auth) and React 19 frontend. Supports 
     technologies: ['React', 'Laravel', 'PostgreSQL', 'Tiptap', 'Framer Motion', 'Sanctum Auth'],
     github: 'https://github.com/Blaze-73/centre-hassan2',
     demo: 'https://centre-hassan-2-front.vercel.app',
-    image: '/images/ch2.png',
+    image: '/images/ch2.webp',
   },
 ]
 
