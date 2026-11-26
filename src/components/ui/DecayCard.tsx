@@ -155,41 +155,45 @@ export function DecayCard({
   }, [reducedMotion, mobile, maxDisplacement, movementBound])
 
   return (
-    <div className={`decay-card ${className}`.trim()} ref={cardRef}>
-      <svg
-        className="decay-card-svg"
-        viewBox="-60 -75 720 900"
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <filter id={filterId}>
-          <feTurbulence
-            type="turbulence"
-            baseFrequency={baseFrequency}
-            numOctaves={numOctaves}
-            seed={seed}
-            stitchTiles="stitch"
-            x="0%"
-            y="0%"
-            width="100%"
-            height="100%"
-            result="turbulence1"
-          />
-          <feDisplacementMap
-            ref={displacementRef}
-            in="SourceGraphic"
-            in2="turbulence1"
-            scale="0"
-            xChannelSelector="R"
-            yChannelSelector="B"
-            x="0%"
-            y="0%"
-            width="100%"
-            height="100%"
-            result="displacementMap3"
-          />
-        </filter>
-        <g>
-          {image ? (
+    <div
+      className={`decay-card ${className}`.trim()}
+      ref={cardRef}
+      style={image ? undefined : { background: fill }}
+    >
+      {image && (
+        <svg
+          className="decay-card-svg"
+          viewBox="-60 -75 720 900"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <filter id={filterId}>
+            <feTurbulence
+              type="turbulence"
+              baseFrequency={baseFrequency}
+              numOctaves={numOctaves}
+              seed={seed}
+              stitchTiles="stitch"
+              x="0%"
+              y="0%"
+              width="100%"
+              height="100%"
+              result="turbulence1"
+            />
+            <feDisplacementMap
+              ref={displacementRef}
+              in="SourceGraphic"
+              in2="turbulence1"
+              scale="0"
+              xChannelSelector="R"
+              yChannelSelector="B"
+              x="0%"
+              y="0%"
+              width="100%"
+              height="100%"
+              result="displacementMap3"
+            />
+          </filter>
+          <g>
             <image
               href={image}
               x="0"
@@ -199,19 +203,9 @@ export function DecayCard({
               filter={`url(#${filterId})`}
               preserveAspectRatio="xMidYMid slice"
             />
-          ) : (
-            <rect
-              x="0"
-              y="0"
-              width="600"
-              height="750"
-              fill={fill}
-              filter={`url(#${filterId})`}
-              rx="16"
-            />
-          )}
-        </g>
-      </svg>
+          </g>
+        </svg>
+      )}
       <div className="decay-card-content">{children}</div>
     </div>
   )

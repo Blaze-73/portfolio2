@@ -5,8 +5,16 @@
   border: 1px solid var(--border);
   background: transparent;
   cursor: default;
-  aspect-ratio: 4 / 5;
+  min-height: 180px;
+  aspect-ratio: 5 / 4;
+  display: flex;
   transition: border-color 0.3s;
+}
+
+@media (min-width: 640px) {
+  .decay-card {
+    aspect-ratio: 4 / 5;
+  }
 }
 
 .decay-card:hover {
@@ -22,15 +30,16 @@
   will-change: transform;
 }
 
+/* In-flow so taller content grows the card instead of being clipped. */
 .decay-card-content {
-  position: absolute;
-  inset: 0;
-  padding: 1.5rem;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  z-index: 1;
   pointer-events: none;
 }
