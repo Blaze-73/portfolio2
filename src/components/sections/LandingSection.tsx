@@ -37,7 +37,7 @@ export function LandingSection() {
             className="flex flex-col items-center justify-center gap-6 text-center md:flex-row md:gap-8 md:text-left lg:gap-10"
           >
             <img
-              src="/images/pfp.png"
+              src="/images/pfp.jpeg"
               alt="Mouataz Billah Kachkach"
               fetchPriority="high"
               className="h-32 w-32 flex-shrink-0 object-cover object-top aspect-square ring-4 ring-[var(--accent)]/20 md:h-48 md:w-48 lg:h-56 lg:w-56"
@@ -58,9 +58,9 @@ export function LandingSection() {
             transition={reducedMotion ? { duration: 0 } : { ...springTransition, delay: 0.2 }}
             className="mt-6 max-w-xl text-lg leading-relaxed text-[var(--text)] md:text-xl"
           >
-            I transform ideas into polished web applications. I write clean,
-            maintainable code and build smooth user experiences across the
-            full stack.
+            I build web apps that feel good to use — from the interface down
+            to the code behind it. I like clean solutions, small details, and
+            shipping things that actually help someone.
           </motion.p>
 
           <motion.div

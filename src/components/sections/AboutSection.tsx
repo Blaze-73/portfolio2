@@ -37,7 +37,7 @@ export function AboutSection() {
       <SectionHeader
         label="About"
         title="About me"
-        subtitle="I am a Full Stack Web Developer who enjoys transforming ideas into polished web applications. I focus on writing clean, maintainable code while creating smooth user experiences across both frontend and backend."
+        subtitle="I'm a full stack web developer from Tangier. I enjoy building useful web apps, learning as I go, and working with people who care about the details."
       />
 
       <motion.div

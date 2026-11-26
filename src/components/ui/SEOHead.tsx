@@ -7,7 +7,7 @@ const schema = {
   '@type': 'Person',
   name: 'Mouataz Billah Kachkach',
   url: SITE_URL,
-  image: `${SITE_URL}/images/pfp.png`,
+  image: `${SITE_URL}/images/pfp.jpeg`,
   jobTitle: 'Full Stack Web Developer',
   description:
     'Full Stack Web Developer crafting modern, polished web applications with React, Next.js, Laravel, and TypeScript.',

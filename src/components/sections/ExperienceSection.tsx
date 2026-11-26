@@ -13,10 +13,17 @@ import {
 const experiences = [
   {
     period: '2023',
-    title: 'FST Tangier — Algorithms & Problem Solving',
+    title: 'FST Tangier — Algorithms & Discord Bots',
     description:
-      'Studied at FST Tangier where I discovered algorithms and problem-solving. This is where I fell in love with coding and started my journey into software development.',
-    tags: ['Algorithms', 'Problem Solving', 'C'],
+      'At FST Tangier I got into algorithms and problem-solving, but what really hooked me was building things on the side: Discord bots and servers using Python (discord.py) and JavaScript.',
+    tags: ['Python', 'discord.py', 'JavaScript'],
+  },
+  {
+    period: '2024',
+    title: 'GTA RP — FiveM Skins & UI',
+    description:
+      'Spent time in the GTA RP scene building custom FiveM skins and putting together the UI around them with JavaScript, HTML, and CSS.',
+    tags: ['FiveM', 'JavaScript', 'HTML', 'CSS'],
   },
   {
     period: '2024',
@@ -33,11 +40,11 @@ const experiences = [
     tags: ['Security', 'Kali Linux', 'Vulnerabilities'],
   },
   {
-    period: '2025 — Present',
-    title: 'ISMONTIC — Full Stack Development',
+    period: 'June 2026 — Present',
+    title: 'Independent Developer — Projects & Local Work',
     description:
-      'Second year focused on building real-world projects using modern frameworks. Applying all the knowledge gathered — from frontend to backend — to create complete full-stack applications.',
-    tags: ['React', 'Next.js', 'Laravel', 'Full Stack'],
+      'I graduated in June 2026. Since then I have been building my own projects and helping out on local and family projects — from small fixes to full apps, start to finish.',
+    tags: ['Freelance', 'Personal Projects', 'Full Stack'],
   },
 ]
 

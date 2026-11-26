@@ -38,7 +38,7 @@
 - ALL static images go in `public/images/` and are referenced as `/images/<filename>`
 - NEVER assume an image exists at a path — use `Get-ChildItem` / glob to check first
 - NEVER guess a project's tech stack — check its `package.json` or source code
-- Profile picture: `/images/pfp.png` (used in LandingSection)
+- Profile picture: `/images/pfp.jpeg` (used in LandingSection)
 
 ## Common Pitfalls (past mistakes)
 - When removing a prop from a component, also remove it from the **interface**, the **destructuring**, and all **call sites**
