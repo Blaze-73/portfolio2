@@ -122,7 +122,7 @@ export function ContactSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="mt-16 grid gap-10 lg:grid-cols-2 lg:gap-16"
+        className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16"
       >
         <motion.div
           variants={fadeLeft}
@@ -207,13 +207,18 @@ export function ContactSection() {
                 <input
                   id="contact-name"
                   type="text"
+                  autoComplete="name"
                   value={form.name}
                   onChange={(e) => handleChange('name', e.target.value)}
+                  aria-invalid={errors.name ? true : undefined}
+                  aria-describedby={errors.name ? 'contact-name-error' : undefined}
                   className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-[var(--text-h)] transition-colors duration-300 placeholder:text-[var(--text)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
                   placeholder="Your name"
                 />
                 {errors.name && (
-                  <p className="mt-1 text-xs text-red-500">{errors.name}</p>
+                  <p id="contact-name-error" role="alert" className="mt-1 text-xs text-red-500">
+                    {errors.name}
+                  </p>
                 )}
               </div>
 
@@ -227,13 +232,18 @@ export function ContactSection() {
                 <input
                   id="contact-email"
                   type="email"
+                  autoComplete="email"
                   value={form.email}
                   onChange={(e) => handleChange('email', e.target.value)}
+                  aria-invalid={errors.email ? true : undefined}
+                  aria-describedby={errors.email ? 'contact-email-error' : undefined}
                   className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-[var(--text-h)] transition-colors duration-300 placeholder:text-[var(--text)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
                   placeholder="you@example.com"
                 />
                 {errors.email && (
-                  <p className="mt-1 text-xs text-red-500">{errors.email}</p>
+                  <p id="contact-email-error" role="alert" className="mt-1 text-xs text-red-500">
+                    {errors.email}
+                  </p>
                 )}
               </div>
 
@@ -249,16 +259,20 @@ export function ContactSection() {
                   rows={5}
                   value={form.message}
                   onChange={(e) => handleChange('message', e.target.value)}
+                  aria-invalid={errors.message ? true : undefined}
+                  aria-describedby={errors.message ? 'contact-message-error' : undefined}
                   className="w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--bg)] px-4 py-3 text-[var(--text-h)] transition-colors duration-300 placeholder:text-[var(--text)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"
                   placeholder="Tell me about your project..."
                 />
                 {errors.message && (
-                  <p className="mt-1 text-xs text-red-500">{errors.message}</p>
+                  <p id="contact-message-error" role="alert" className="mt-1 text-xs text-red-500">
+                    {errors.message}
+                  </p>
                 )}
               </div>
 
               {sendError && (
-                <p className="text-xs text-red-500 text-center">
+                <p role="alert" className="text-center text-xs text-red-500">
                   Failed to send. Check your EmailJS config or try again later.
                 </p>
               )}
