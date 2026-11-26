@@ -3,6 +3,7 @@ import {
   useEffect,
   useRef,
   useCallback,
+  useMemo,
 } from 'react'
 import { motion, type Variants } from 'framer-motion'
 import { Section } from '../ui/Section'
@@ -111,6 +112,7 @@ function TypewriterLine({
   active,
   isTyping,
   speed,
+  index,
   onDone,
 }: {
   prefix: '$' | '>'
@@ -119,7 +121,8 @@ function TypewriterLine({
   active: boolean
   isTyping: boolean
   speed: number
-  onDone: () => void
+  index: number
+  onDone: (index: number) => void
 }) {
   const [text, setText] = useState('')
   const doneRef = useRef(false)
@@ -137,11 +140,11 @@ function TypewriterLine({
       if (i >= command.length) {
         clearInterval(interval)
         doneRef.current = true
-        onDone()
+        onDone(index)
       }
     }, speed)
     return () => clearInterval(interval)
-  }, [active, isTyping, command, speed, onDone])
+  }, [active, isTyping, command, speed, onDone, index])
 
   return (
     <div className="flex gap-2 min-h-[1.25em]" aria-label={active ? command : ''}>
@@ -172,7 +175,8 @@ function TerminalWindow({ reducedMotion }: { reducedMotion: boolean }) {
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([])
 
   useEffect(() => {
-    return () => timersRef.current.forEach(clearTimeout)
+    const timers = timersRef.current
+    return () => timers.forEach(clearTimeout)
   }, [])
 
   useEffect(() => {
@@ -239,7 +243,8 @@ function TerminalWindow({ reducedMotion }: { reducedMotion: boolean }) {
               active={i <= activeLine}
               isTyping={i === activeLine}
               speed={line.prefix === '$' ? 25 : 15}
-              onDone={() => handleLineDone(i)}
+              index={i}
+              onDone={handleLineDone}
             />
           ),
         )}
@@ -256,11 +261,35 @@ function TerminalWindow({ reducedMotion }: { reducedMotion: boolean }) {
 
 function ContributionGrid() {
   const { ref, inView } = useInView(0.3)
-  const weeks = 26
   const days = 7
+  const cell = 10
+  const gap = 3
+  const minWeeks = 8
+  const maxWeeks = 52
 
-  const grid = Array.from({ length: weeks }, () =>
-    Array.from({ length: days }, () => Math.floor(Math.random() * 5)),
+  const [weeks, setWeeks] = useState(maxWeeks)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const measure = () => {
+      const available = el.clientWidth - 40 // horizontal padding (p-5)
+      const fit = Math.floor((available + gap) / (cell + gap))
+      setWeeks(Math.min(maxWeeks, Math.max(minWeeks, fit)))
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [ref])
+
+  // Keep the activity pattern stable across re-renders/theme changes.
+  const grid = useMemo(
+    () =>
+      Array.from({ length: weeks }, () =>
+        Array.from({ length: days }, () => Math.floor(Math.random() * 5)),
+      ),
+    [weeks],
   )
 
   const getColor = (level: number) => {
@@ -355,7 +384,7 @@ export function GitHubSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="mt-16 grid gap-6 lg:grid-cols-5"
+        className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-5"
       >
         <div className="flex flex-col gap-6 lg:col-span-2">
           <HoverCard>
