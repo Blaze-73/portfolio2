@@ -57,7 +57,7 @@ export function ExperienceSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="mt-16 grid gap-6 md:grid-cols-2"
+        className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2"
       >
         {experiences.map((exp) => (
           <motion.div

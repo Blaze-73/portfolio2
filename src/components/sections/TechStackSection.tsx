@@ -82,7 +82,7 @@ export function TechStackSection() {
       />
 
       {reducedMotion ? (
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="mt-16 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {categories.map((category, i) => (
             <DecayCard key={category.title} fill={categoryColors[i]}>
               <Title>{category.title}</Title>
@@ -96,7 +96,7 @@ export function TechStackSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+          className="mt-16 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
         >
           {categories.map((category, i) => (
             <motion.div

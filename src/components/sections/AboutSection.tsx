@@ -45,7 +45,7 @@ export function AboutSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="mt-16 grid gap-6 md:grid-cols-3"
+        className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3"
       >
         {cards.map((card) => (
           <SpotlightCard key={card.title}>
