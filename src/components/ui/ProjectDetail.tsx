@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -17,6 +17,9 @@ interface ProjectDetailProps {
 }
 
 export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const previousFocus = useRef<HTMLElement | null>(null)
+
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -28,6 +31,10 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
     if (!project) return
 
     document.addEventListener('keydown', handleKey)
+
+    previousFocus.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
+    closeRef.current?.focus()
 
     const html = document.documentElement
     const body = document.body
@@ -45,6 +52,7 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
       body.style.overflow = origOverflow
       body.style.paddingRight = origPadding
       html.removeAttribute('data-modal-open')
+      previousFocus.current?.focus?.()
     }
   }, [project, handleKey])
 
@@ -62,13 +70,17 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
 
           <div className="absolute inset-0 flex items-center justify-center p-0 sm:p-4 pointer-events-none">
             <div
-              className="pointer-events-auto relative flex w-full flex-col bg-[var(--bg)] overflow-hidden h-full sm:max-h-[85vh] sm:rounded-2xl sm:border sm:border-[var(--border)] sm:shadow-2xl sm:max-w-3xl"
+            className="pointer-events-auto relative flex w-full flex-col bg-[var(--bg)] overflow-hidden h-full sm:max-h-[85vh] sm:rounded-2xl sm:border sm:border-[var(--border)] sm:shadow-2xl sm:max-w-3xl"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-detail-title"
+          >
+            <button
+              ref={closeRef}
+              onClick={onClose}
+              className="absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white/80 transition-colors hover:bg-black/70 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+              aria-label={`Close ${project.title} details`}
             >
-              <button
-                onClick={onClose}
-                className="absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white/80 transition-colors hover:bg-black/70 hover:text-white"
-                aria-label="Close"
-              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -103,7 +115,10 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
               )}
 
               <div className="flex flex-col overflow-y-auto p-5 sm:p-8">
-                <h2 className="text-xl sm:text-3xl font-bold text-[var(--text-h)]">
+                <h2
+                  id="project-detail-title"
+                  className="text-xl sm:text-3xl font-bold text-[var(--text-h)]"
+                >
                   {project.title}
                 </h2>
 
@@ -133,19 +148,21 @@ export function ProjectDetail({ project, onClose }: ProjectDetailProps) {
                       Live Demo
                     </a>
                   )}
-                  <a
-                    href="https://github.com/Blaze-73?tab=repositories"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/btn inline-flex items-center justify-center rounded-xl border border-[var(--border)] px-5 py-3 sm:py-2.5 text-sm font-medium text-[var(--text)] transition-colors hover:text-[var(--text-h)] hover:bg-[var(--code-bg)]"
-                  >
-                    <span className="inline-flex items-center gap-1">
-                      GitHub
-                      <span className="inline-block transition-transform group-hover/btn:translate-x-1">
-                        →
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/btn inline-flex items-center justify-center rounded-xl border border-[var(--border)] px-5 py-3 sm:py-2.5 text-sm font-medium text-[var(--text)] transition-colors hover:text-[var(--text-h)] hover:bg-[var(--code-bg)]"
+                    >
+                      <span className="inline-flex items-center gap-1">
+                        GitHub
+                        <span className="inline-block transition-transform group-hover/btn:translate-x-1">
+                          →
+                        </span>
                       </span>
-                    </span>
-                  </a>
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
