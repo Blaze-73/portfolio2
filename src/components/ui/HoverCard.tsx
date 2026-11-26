@@ -54,7 +54,7 @@ export function HoverCard({ children, className }: HoverCardProps) {
       mouseX.set((e.clientX - rect.left) / rect.width)
       mouseY.set((e.clientY - rect.top) / rect.height)
     },
-    [reducedMotion],
+    [reducedMotion, mouseX, mouseY],
   )
 
   const handleMouseLeave = useCallback(() => {
@@ -62,7 +62,7 @@ export function HoverCard({ children, className }: HoverCardProps) {
     setHover(false)
     mouseX.set(0.5)
     mouseY.set(0.5)
-  }, [])
+  }, [mouseX, mouseY])
 
   const handleClick = useCallback(() => {
     if (!isTouch) return

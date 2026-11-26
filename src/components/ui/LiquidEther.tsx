@@ -1191,7 +1191,7 @@ export default function LiquidEther({
             Common.renderer.dispose()
             Common.renderer.forceContextLoss()
           }
-        } catch (_e) {
+        } catch {
           // cleanup safely
         }
       }
@@ -1270,14 +1270,14 @@ export default function LiquidEther({
       if (resizeObserverRef.current) {
         try {
           resizeObserverRef.current.disconnect()
-        } catch (_e) {
+        } catch {
           // cleanup safely
         }
       }
       if (intersectionObserverRef.current) {
         try {
           intersectionObserverRef.current.disconnect()
-        } catch (_e) {
+        } catch {
           // cleanup safely
         }
       }
