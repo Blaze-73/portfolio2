@@ -15,8 +15,7 @@
   background: var(--background-dark, #120f17);
   overflow: hidden;
   cursor: pointer;
-  aspect-ratio: 4 / 3;
-  min-height: 200px;
+  min-height: 240px;
 
   --glow-x: 50%;
   --glow-y: 50%;
@@ -49,19 +48,28 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to top,
-    rgba(18, 15, 23, 0.92) 0%,
-    rgba(18, 15, 23, 0.6) 40%,
-    rgba(18, 15, 23, 0.3) 70%,
-    rgba(18, 15, 23, 0.1) 100%
-  );
+      to top,
+      rgba(12, 10, 16, 0.96) 0%,
+      rgba(12, 10, 16, 0.88) 25%,
+      rgba(12, 10, 16, 0.62) 55%,
+      rgba(12, 10, 16, 0.22) 82%,
+      rgba(12, 10, 16, 0.08) 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(12, 10, 16, 0.55) 0%,
+      rgba(12, 10, 16, 0.15) 60%,
+      transparent 100%
+    );
   z-index: 1;
+  pointer-events: none;
 }
 
 .mb-card-body {
   position: relative;
   z-index: 2;
   color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
 }
 
 .mb-card-title {
@@ -99,6 +107,26 @@
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Text auto-hide: only on devices with a real hover pointer */
+@media (hover: hover) and (pointer: fine) {
+  .mb-card--autohide .mb-card-desc,
+  .mb-card--autohide .mb-card-tech {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .mb-card--autohide:hover .mb-card-desc,
+  .mb-card--autohide:hover .mb-card-tech,
+  .mb-card--autohide:focus-within .mb-card-desc,
+  .mb-card--autohide:focus-within .mb-card-tech {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Border glow */
