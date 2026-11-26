@@ -1,10 +1,7 @@
-import { motion } from 'framer-motion'
 import { Container } from '../ui/Container'
 import { Button } from '../ui/Button'
 import { GithubIcon, LinkedinIcon, MailIcon } from '../ui/Icons'
 import { TechMarquee } from './TechMarquee'
-import { useReducedMotion } from '../../hooks/useReducedMotion'
-import { fadeUp, fadeIn, staggerContainer, springTransition } from '../../lib/animations'
 
 const socialLinks = [
   { href: 'https://github.com/Blaze-73', label: 'GitHub', Icon: GithubIcon },
@@ -13,8 +10,6 @@ const socialLinks = [
 ]
 
 export function LandingSection() {
-  const reducedMotion = useReducedMotion()
-
   return (
     <section
       id="landing"
@@ -24,22 +19,15 @@ export function LandingSection() {
       <div className="absolute -right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-[var(--accent)] opacity-[0.02] blur-[100px] pointer-events-none" aria-hidden="true" />
 
       <Container>
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col items-center text-center"
-          style={{ willChange: 'transform' }}
-        >
-          <motion.div
-            variants={fadeUp}
-            transition={reducedMotion ? { duration: 0 } : springTransition}
-            className="flex flex-col items-center justify-center gap-6 text-center md:flex-row md:gap-8 md:text-left lg:gap-10"
-          >
+        <div className="flex flex-col items-center text-center">
+          <div className="hero-rise flex flex-col items-center justify-center gap-6 text-center md:flex-row md:gap-8 md:text-left lg:gap-10">
             <img
               src="/images/pfp.jpeg"
               alt="Mouataz Billah Kachkach"
+              width={224}
+              height={224}
               fetchPriority="high"
+              decoding="async"
               className="h-32 w-32 flex-shrink-0 object-cover object-top aspect-square ring-4 ring-[var(--accent)]/20 md:h-48 md:w-48 lg:h-56 lg:w-56"
             />
             <div className="text-center md:text-left">
@@ -51,34 +39,22 @@ export function LandingSection() {
                 <span className="text-[var(--accent)]">Kachkach</span>
               </h1>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.p
-            variants={fadeUp}
-            transition={reducedMotion ? { duration: 0 } : { ...springTransition, delay: 0.2 }}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-[var(--text)] md:text-xl"
-          >
+          <p className="hero-text-in mt-6 max-w-xl text-lg leading-relaxed text-[var(--text)] md:text-xl">
             I build web apps that feel good to use — from the interface down
             to the code behind it. I like clean solutions, small details, and
             shipping things that actually help someone.
-          </motion.p>
+          </p>
 
-          <motion.div
-            variants={fadeUp}
-            transition={reducedMotion ? { duration: 0 } : { ...springTransition, delay: 0.3 }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-4"
-          >
+          <div className="hero-rise hero-delay-1 mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button href="#projects">View Projects</Button>
             <Button href="#contact" variant="secondary">
               Contact Me
             </Button>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={fadeIn}
-            transition={reducedMotion ? { duration: 0 } : { ...springTransition, delay: 0.5 }}
-            className="mt-16 flex items-center gap-6"
-          >
+          <div className="hero-rise hero-delay-2 mt-16 flex items-center gap-6">
             {socialLinks.map(({ href, label, Icon }) => (
               <a
                 key={label}
@@ -91,8 +67,8 @@ export function LandingSection() {
                 <Icon />
               </a>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </Container>
 
       <div className="absolute bottom-0 left-0 right-0">

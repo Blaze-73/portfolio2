@@ -20,6 +20,31 @@
   will-change: transform;
 }
 
+/* Hero entrance uses CSS so it starts with first paint and keeps the hero
+   out of the JavaScript critical path. */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Transform-only: the LCP paragraph stays paintable immediately. */
+@keyframes hero-text-in {
+  from { transform: translateY(8px); }
+  to { transform: none; }
+}
+
+.hero-rise { animation: hero-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-text-in { animation: hero-text-in 0.4s ease-out both; }
+.hero-delay-1 { animation-delay: 0.08s; }
+.hero-delay-2 { animation-delay: 0.16s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise,
+  .hero-text-in {
+    animation: none;
+  }
+}
+
 /* Default (light) tokens — also applied when no data-theme attribute is set yet */
 :root,
 [data-theme='light'] {

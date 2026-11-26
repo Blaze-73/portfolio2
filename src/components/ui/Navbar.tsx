@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '../../lib/utils'
 import { ThemeToggle } from './ThemeToggle'
 import { GithubIcon } from './Icons'
@@ -17,28 +16,6 @@ const labels: Record<string, string> = {
   github: 'GitHub',
   experience: 'Experience',
   contact: 'Contact',
-}
-
-const ease = [0.25, 0.1, 0.25, 1] as const
-
-const menuVariants = {
-  closed: {
-    opacity: 0,
-    transition: { duration: 0.25, ease },
-  },
-  open: {
-    opacity: 1,
-    transition: { duration: 0.3, ease },
-  },
-}
-
-const itemVariants = {
-  closed: { opacity: 0, x: -24 },
-  open: (i: number) => ({
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.3, delay: 0.05 * i, ease },
-  }),
 }
 
 function useScrollLock(lock: boolean) {
@@ -172,62 +149,54 @@ export function Navbar({ sectionIds }: NavbarProps) {
         </div>
       </div>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            id="mobile-menu"
-            key="mobile-menu"
-            variants={menuVariants}
-            initial="closed"
-            animate="open"
-            exit="closed"
-            className={cn(
-              'absolute inset-x-0 top-full z-50 min-h-[calc(100dvh-57px)] max-h-[calc(100dvh-57px)] overflow-y-auto overscroll-contain',
-              'bg-[var(--bg)] border-t border-[var(--border)] shadow-lg'
-            )}
-          >
-            <nav className="mx-auto max-w-7xl px-6 py-8" aria-label="Mobile navigation">
-              <div className="mb-6 flex items-center gap-3 px-5">
-                <a
-                  href="https://github.com/Blaze-73"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--code-bg)] text-[var(--text)] transition-all duration-200 hover:text-[var(--accent)]"
-                  aria-label="GitHub profile"
-                >
-                  <GithubIcon />
-                </a>
-              </div>
-              <div className="space-y-1">
-                {sectionIds.map((id, i) => (
-                  <motion.a
-                    key={id}
-                    href={`#${id}`}
-                    onClick={(e) => { e.preventDefault(); handleClick(id) }}
-                    custom={i}
-                    variants={itemVariants}
-                    initial="closed"
-                    animate="open"
-                    exit="closed"
-                    className={cn(
-                      'flex items-center rounded-xl px-5 py-3.5 text-base font-medium transition-all duration-200',
-                      active === id
-                        ? 'text-[var(--accent)] bg-[var(--accent-bg)]'
-                        : 'text-[var(--text)] bg-[var(--code-bg)] hover:text-[var(--text-h)]'
-                    )}
-                    aria-current={active === id ? 'true' : undefined}
-                  >
-                    <span className="mr-4 text-xs font-mono text-[var(--text)]/50 tabular-nums">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    {labels[id] || id}
-                  </motion.a>
-                ))}
-              </div>
-            </nav>
-          </motion.div>
+      <div
+        id="mobile-menu"
+        aria-hidden={!menuOpen}
+        className={cn(
+          'absolute inset-x-0 top-full z-50 min-h-[calc(100dvh-57px)] max-h-[calc(100dvh-57px)] overflow-y-auto overscroll-contain',
+          'bg-[var(--bg)] border-t border-[var(--border)] shadow-lg transition-[opacity,transform] duration-300 md:hidden',
+          menuOpen
+            ? 'visible translate-y-0 opacity-100'
+            : 'pointer-events-none invisible -translate-y-2 opacity-0'
         )}
-      </AnimatePresence>
+      >
+        <nav className="mx-auto max-w-7xl px-6 py-8" aria-label="Mobile navigation">
+          <div className="mb-6 flex items-center gap-3 px-5">
+            <a
+              href="https://github.com/Blaze-73"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--code-bg)] text-[var(--text)] transition-all duration-200 hover:text-[var(--accent)]"
+              aria-label="GitHub profile"
+            >
+              <GithubIcon />
+            </a>
+          </div>
+          <div className="space-y-1">
+            {sectionIds.map((id, i) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={(e) => { e.preventDefault(); handleClick(id) }}
+                style={{ transitionDelay: menuOpen ? `${i * 30}ms` : '0ms' }}
+                className={cn(
+                  'flex items-center rounded-xl px-5 py-3.5 text-base font-medium transition-all duration-200',
+                  menuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0',
+                  active === id
+                    ? 'text-[var(--accent)] bg-[var(--accent-bg)]'
+                    : 'text-[var(--text)] bg-[var(--code-bg)] hover:text-[var(--text-h)]'
+                )}
+                aria-current={active === id ? 'true' : undefined}
+              >
+                <span className="mr-4 text-xs font-mono text-[var(--text)]/50 tabular-nums">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                {labels[id] || id}
+              </a>
+            ))}
+          </div>
+        </nav>
+      </div>
     </nav>
   )
 }

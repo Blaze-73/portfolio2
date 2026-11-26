@@ -5,13 +5,23 @@ import { SEOHead } from './components/ui/SEOHead'
 import { ScrollPath } from './components/ui/ScrollPath'
 import { Navbar } from './components/ui/Navbar'
 import { LandingSection } from './components/sections/LandingSection'
-import { AboutSection } from './components/sections/AboutSection'
-import { WorkflowSection } from './components/sections/WorkflowSection'
-import { TechStackSection } from './components/sections/TechStackSection'
-import { ProjectsSection } from './components/sections/ProjectsSection'
 import { useReducedMotion } from './hooks/useReducedMotion'
 import { useMediaQuery } from './hooks/useMediaQuery'
 
+// Everything below the fold is loaded after the hero. This keeps the
+// animation libraries (Framer Motion, GSAP) out of the initial bundle.
+const AboutSection = lazy(() =>
+  import('./components/sections/AboutSection').then((m) => ({ default: m.AboutSection })),
+)
+const WorkflowSection = lazy(() =>
+  import('./components/sections/WorkflowSection').then((m) => ({ default: m.WorkflowSection })),
+)
+const TechStackSection = lazy(() =>
+  import('./components/sections/TechStackSection').then((m) => ({ default: m.TechStackSection })),
+)
+const ProjectsSection = lazy(() =>
+  import('./components/sections/ProjectsSection').then((m) => ({ default: m.ProjectsSection })),
+)
 const LiquidEther = lazy(() => import('./components/ui/LiquidEther'))
 const GitHubSection = lazy(() =>
   import('./components/sections/GitHubSection').then((m) => ({ default: m.GitHubSection })),
@@ -70,17 +80,13 @@ function App() {
             <Navbar sectionIds={SECTION_IDS} />
             <ScrollPath sectionIds={SECTION_IDS} />
             <LandingSection />
-            <AboutSection />
-            <WorkflowSection />
-            <TechStackSection />
-            <ProjectsSection />
             <Suspense fallback={<SectionFallback />}>
+              <AboutSection />
+              <WorkflowSection />
+              <TechStackSection />
+              <ProjectsSection />
               <GitHubSection />
-            </Suspense>
-            <Suspense fallback={<SectionFallback />}>
               <ExperienceSection />
-            </Suspense>
-            <Suspense fallback={<SectionFallback />}>
               <ContactSection />
             </Suspense>
           </div>
